@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 README1.md
+learn.txt
 
 # Editor directories and files
 .vscode/*
@@ -23,3 +24,4 @@ README1.md
 *.njsproj
 *.sln
 *.sw?
+

@@ -10,7 +10,7 @@ const navItems:NavItems[] = [
         name:"About Us"
     },
     {name:"Blog"},
-        {name:"Categories"}
+    {name:"Categories"}
     
     
 ]

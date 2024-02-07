@@ -3,18 +3,12 @@ import Logo from "./logo";
 import Search from "./search";
 import Cart from "./cart";
 import UserSection from "./user-section";
-import { useEffect, useRef } from "react";
+import {useRef } from "react";
 
 const Navbar = () => {
 
   const ref = useRef<HTMLElement|null>(null)
 
-  useEffect(()=>{
-    // detecting weather navbar touch the top or not
-    // if(ref.current?.offsetTop && Math.abs(ref?.current?.offsetTop - window.scrollT))
-    console.log(window.scrollY);
-
-  },[])
     return (
         <nav ref={ref} className="fixed left-0 right-0 top-0 sm:top-5 md:top-8 left z-20 mx-auto max-w-7xl w-full sm:w-5/6">
             <div className="flex flex-row items-center justify-between px-3 py-3 bg-white sm:rounded-xl shadow-sm shadow-[#679F0A] relative space-x-2">

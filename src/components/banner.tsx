@@ -17,7 +17,7 @@ const Banner = ({
       <img
         src={src ? src : "/banner3.png"}
         alt="banner pic"
-        className="rounded-b-xl"
+        className="rounded-b-xl w-screen"
       />
 
       <div className="absolute z-10 top-4 sm:top-1/3 md:top-1/3 lg:top-1/3 w-7/12 sm:w-3/6 h-2/3">

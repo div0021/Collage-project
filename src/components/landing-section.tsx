@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import Banner from "./banner";
+import TopProducts from "./top-product";
 
 const LandingSection = () => {
   const [banner, setBanner] = useState<number>(0);
@@ -20,8 +21,9 @@ const LandingSection = () => {
   }, [handleBannerSlide]);
 
   return (
+    <>
     <div className=" w-full flex justify-center">
-      <div className="w-full sm:w-11/12  relative h-full">
+      <div className="w-full relative h-full">
         <div className="absolute z-10 left-[48%] bottom-2 px-2 py-1 bg-gray-50/10 rounded-full flex gap-2 items-center">
           <div
             className={`cursor-pointer bg-gray-500/60 hover:bg-gray-500/90 w-2 h-2 sm:w-3 sm:h-3 rounded-full ${
@@ -99,6 +101,8 @@ const LandingSection = () => {
         </div>
       </div>
     </div>
+        <TopProducts />
+    </>
   );
 };
 export default LandingSection;

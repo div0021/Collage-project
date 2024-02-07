@@ -1,14 +1,20 @@
 import {RxCross2} from "react-icons/rx"
-import {useState} from "react"
+import {useContext} from "react"
 import { cn } from "../lib/cn";
 import Button from "./ui/button";
+import { ProviderContext, ProviderContextType } from "./provider/provider";
+import productData from '../data/product.json'
+import CartItem from "./cart-item";
 
 interface CartProps{
     number:number,
     items?:[]
 }
 const Cart = ({number,items}:CartProps) => {
-    const [isOpen,setIsOpen] = useState<boolean>(false);
+    const {isOpen,setIsOpen} = useContext(ProviderContext) as ProviderContextType;
+
+    //get cart data 
+    const cartData = productData.filter(el=>el.inCart===true);
 
     return (
         <>
@@ -37,8 +43,10 @@ const Cart = ({number,items}:CartProps) => {
 
                 </div>
                 {/* TODO: Add items based on condition */}
+
+
                 <div className="flex flex-col flex-1">
-                   {!items ? (
+                   {!productData ? (
                     <div className="w-full h-full flex flex-col justify-center items-center space-y-3">
                         <span>Your list is empty</span>
                              <Button label="Continue Shopping" onClick={()=>{}} className="bg-black text-white w-5/12 border-none"/>
@@ -47,6 +55,11 @@ const Cart = ({number,items}:CartProps) => {
                    ):(
                     <div>
                         {/* Add items */}
+                        <div>
+                           {cartData.map(el=>(
+                            <CartItem key={el.id} id={el.id} description={el.description} discount={el.price.discount} image={el.image[0].url} name={el.name} percentage={el.price.percent} price={el.price.original} quantity="4" />
+                           ))}
+                        </div>
                     </div>
                    )}
                 </div>
