@@ -10,7 +10,7 @@ interface CartProps{
     number:number,
     items?:[]
 }
-const Cart = ({number,items}:CartProps) => {
+const Cart = ({number}:CartProps) => {
     const {isOpen,setIsOpen} = useContext(ProviderContext) as ProviderContextType;
 
     //get cart data 

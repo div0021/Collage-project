@@ -21,7 +21,7 @@ interface CartItemProps{
     image:string,
 }
 
-const CartItem = ({description,discount,id,image,name,percentage,price,quantity}:CartItemProps) => {
+const CartItem = ({description,discount,image,name,percentage,price,quantity}:CartItemProps) => {
 
   return (
     <Card className="w-full flex-row">

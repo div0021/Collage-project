@@ -17,20 +17,7 @@ import { ProviderContext, ProviderContextType } from "./provider/provider";
 import { IoAdd } from "react-icons/io5";
 import {RiSubtractFill} from "react-icons/ri"
 
-const data = [
-  { img: "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGlua2VkaW4lMjBiYW5uZXJ8ZW58MHx8MHx8fDA%3D",
-    value:'product_img1'
-},
-  { img: "https://images.unsplash.com/photo-1682407186023-12c70a4a35e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80",
-    value:'product_img2'
-},
-  { img: "https://images.unsplash.com/photo-1682407186023-12c70a4a35e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80",
-    value:'product_img3'
-},
-  { img: "https://images.unsplash.com/photo-1682407186023-12c70a4a35e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80",
-    value:'product4_img'
-},
-];
+
 
 
 const ProductPage = () => {
