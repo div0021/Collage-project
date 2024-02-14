@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import ComponentWrapper from "./component-wrapper";
 import {
   Button,
   IconButton,
@@ -10,10 +9,10 @@ import {
   TabsBody,
   TabsHeader,
 } from "@material-tailwind/react";
-import {useContext, useState } from "react";
+import {useContext, useEffect, useState } from "react";
 import { BiLeaf } from "react-icons/bi";
 import productData from "../data/product.json"
-import { ProviderContext, ProviderContextType } from "./provider/provider";
+import { CartActionKind, ProviderContext, ProviderContextType } from "./provider/provider";
 import { IoAdd } from "react-icons/io5";
 import {RiSubtractFill} from "react-icons/ri"
 
@@ -23,27 +22,32 @@ import {RiSubtractFill} from "react-icons/ri"
 const ProductPage = () => {
   const { productId } = useParams();
 
-  const {setIsOpen} = useContext(ProviderContext) as ProviderContextType;
+  const {setIsOpen,dispatch,cartState} = useContext(ProviderContext) as ProviderContextType;
 
   const product = productData.filter(el=>el.id===productId)[0];
 
   const [quantity, setQuantity] = useState<number>(1);
 
+  const isPresentInCart = cartState.productsInCart.filter(item=>item.id === productId).length > 0;
+
+  useEffect(()=>{
+    window.scrollTo(0,0);
+  },[])
+
   return (
-    <div className="w-screen">
-      <ComponentWrapper>
-        <div className="p-10 pt-28 lg:pt-44">
+    <div className="w-full">
+        <div className="px-5 sm:p-10 pt-10 sm:pt-28 lg:pt-44">
           <div>
-            <div className="grid grid-cols:1 lg:grid-cols-2 gap-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
 
               {/* Images Section */}
-              <div>
+              <div className="w-full">
                 <Tabs value="image1">
                   <TabsBody className="">
                     {product.image.map((el) => (
-                      <TabPanel key={el.label} value={el.label} className="flex justify-center items-center">
+                      <TabPanel key={el.label} value={el.label} className="flex justify-start  sm:justify-center items-center mx-auto ">
                         <div className="relative">
-                        <img src={el.url} alt="image" className="max-h-96"/>
+                        <img src={el.url} alt="image" className="max-h-96 mx-auto"/>
                         </div>
                        
                       </TabPanel>
@@ -98,7 +102,14 @@ const ProductPage = () => {
                     <RiSubtractFill />
                   </IconButton> 
 
-                  <Button size="md" color="green" className="px-5 rounded-full" onClick={()=>setIsOpen(true)}>Add to Cart</Button>
+                  <Button size="md" color="green" className="px-5 rounded-full" onClick={()=>{
+
+                    if(!isPresentInCart){
+                      dispatch({type:CartActionKind.ADD,payload:Number(productId)})
+                    }
+                    
+                    setIsOpen(true)
+                    }}>{isPresentInCart ? "Go to Cart" : "Add to cart"}</Button>
                 </div>
 
                 
@@ -127,7 +138,6 @@ const ProductPage = () => {
             </div>
           </div>
         </div>
-      </ComponentWrapper>
     </div>
   );
 };

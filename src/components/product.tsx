@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import Button from "./ui/button";
-import { ProviderContext, ProviderContextType } from "./provider/provider";
+import { CartActionKind, ProviderContext, ProviderContextType } from "./provider/provider";
 import { useNavigate } from "react-router-dom";
 
 interface ProductProps {
@@ -13,11 +13,10 @@ const Product = ({id,image,name}:ProductProps) => {
     const [isHovered,setIsHovered] = useState<boolean>(false);
     const navigate = useNavigate();
 
-    const {setIsOpen} = useContext(ProviderContext) as ProviderContextType;
+    const {setIsOpen,cartState,dispatch} = useContext(ProviderContext) as ProviderContextType;
 
-    // Todo Implement handle Click
-    // 1. add item to add to cart 
-    // 2. open the cart.
+    const isPresentInCart = cartState.productsInCart.filter(product => product.id === id).length > 0;
+
 
     return (
         <div onMouseEnter={()=>setIsHovered(true)} onMouseLeave={()=>setIsHovered(false)} className={`w-full relative pt-2 sm:pt-5 border-2 ${isHovered && "border-transparent"}`}>
@@ -38,8 +37,11 @@ const Product = ({id,image,name}:ProductProps) => {
                         <p>$50.00</p>
                       </div>
                       {isHovered && (<div className="mt-2 w-full flex">
-                        <Button className="p-1  text-xs  w-[4.5rem] md:w-full md:p-2 md:text-md sm:p-2 lg:text-lg" label="Add to cart"
+                        <Button className="p-1  text-xs  w-[4.5rem] md:w-full md:p-2 md:text-md sm:p-2 lg:text-lg" label={isPresentInCart ? "Go to Cart" : "Add to cart"}
+
                         onClick={()=>{
+
+                          if(!isPresentInCart){dispatch({type: CartActionKind.ADD,payload:Number(id) && Number(id)});}
                           
                           setIsOpen(true)}}
 

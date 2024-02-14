@@ -1,343 +1,332 @@
 [
-    {
-        "id":"1",
-        "name":"Patanjali01",
-        "inCart":false,
-        "image":[
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image1"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image2"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image3"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image4"
-            }
-        ],
-        "categories":["aurvedic","organic","natural","ecofriendly"],
-        "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
-        "rating":"5",
-        "price":{
-            "original":"80.00",
-            "discount":"50.00",
-            "percent":"38"
-        }
-    },
-    {
-        "id":"2",
-        "name":"Patanjali02",
-        "inCart":false,
-        "image":[
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image1"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image2"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image3"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image4"
-            }
-        ],
-        "categories":["natural","ecofriendly"],
-        "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
-        "rating":"1",
-        "price":{
-            "original":"80.00",
-            "discount":"50.00",
-            "percent":"38"
-        }
-    },
-    {
-        "id":"3",
-        "name":"Patanjali03",
-        "inCart":false,
-        "image":[
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image1"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image2"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image3"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image4"
-            }
-        ],
-        "categories":["ecofriendly"],
-        "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
-        "rating":"1",
-        "price":{
-            "original":"80.00",
-            "discount":"50.00",
-            "percent":"38"
-        }
-    },
-    {
-        "id":"4",
-        "name":"Patanjali04",
-        "inCart":false,
-        "image":[
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image1"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image2"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image3"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image4"
-            }
-        ],
-        "categories":["aurvedic","organic"],
-        "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
-        "rating":"2",
-        "price":{
-            "original":"80.00",
-            "discount":"50.00",
-            "percent":"38"
-        }
-    },
-    {
-        "id":"5",
-        "name":"Patanjali05",
-        "inCart":false,
-        "image":[
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image1"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image2"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image3"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image4"
-            }
-        ],
-        "categories":["organic","natural"],
-        "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
-        "rating":"4",
-        "price":{
-            "original":"80.00",
-            "discount":"50.00",
-            "percent":"38"
-        }
-    },
-    {
-        "id":"6",
-        "name":"Patanjali06",
-        "inCart":false,
-        "image":[
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image1"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image2"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image3"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image4"
-            }
-        ],
-        "categories":["natural"],
-        "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
-        "rating":"3",
-        "price":{
-            "original":"80.00",
-            "discount":"50.00",
-            "percent":"38"
-        }
-    },
-    {
-        "id":"7",
-        "name":"Patanjali07",
-        "inCart":false,
-        "image":[
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image1"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image2"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image3"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image4"
-            }
-        ],
-        "categories":["aurvedic","ecofriendly"],
-        "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
-        "rating":"5",
-        "price":{
-            "original":"80.00",
-            "discount":"50.00",
-            "percent":"38"
-        }
-    },
-    {
-        "id":"8",
-        "name":"Patanjali08",
-        "inCart":false,
-        "image":[
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image1"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image2"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image3"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image4"
-            }
-        ],
-        "categories":["aurvedic","organic","natural","ecofriendly"],
-        "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
-        "rating":"2",
-        "price":{
-            "original":"80.00",
-            "discount":"50.00",
-            "percent":"38"
-        }
-    },
-    {
-        "id":"9",
-        "name":"Patanjali09",
-        "inCart":false,
-        "image":[
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image1"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image2"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image3"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image4"
-            }
-        ],
-        "categories":["aurvedic","organic","ecofriendly"],
-        "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
-        "rating":"1",
-        "price":{
-            "original":"80.00",
-            "discount":"50.00",
-            "percent":"38"
-        }
-    },
-    {
-        "id":"10",
-        "name":"Patanjali10",
-        "inCart":false,
-        "image":[
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image1"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image2"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image3"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image4"
-            }
-        ],
-        "categories":["aurvedic","natural","ecofriendly"],
-        "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
-        "rating":"3",
-        "price":{
-            "original":"80.00",
-            "discount":"50.00",
-            "percent":"38"
-        }
-    },
-    {
-        "id":"11",
-        "name":"Patanjali11",
-        "inCart":false,
-        "image":[
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image1"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image2"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image3"
-            },
-            {
-                "url":"https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
-                "label":"image4"
-            }
-        ],
-        "categories":["aurvedic","organic","natural","ecofriendly"],
-        "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
-        "rating":"3",
-        "price":{
-            "original":"80.00",
-            "discount":"50.00",
-            "percent":"38"
-        }
+  {
+    "id": "1",
+    "name": "Patanjali01",
+    "image": [
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image1"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image2"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image3"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image4"
+      }
+    ],
+    "categories": ["aurvedic", "organic", "natural", "ecofriendly"],
+    "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
+    "rating": "5",
+    "price": {
+      "original": "80.00",
+      "discount": "50.00",
+      "percent": "38"
     }
+  },
+  {
+    "id": "2",
+    "name": "Patanjali02",
+    "image": [
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image1"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image2"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image3"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image4"
+      }
+    ],
+    "categories": ["natural", "ecofriendly"],
+    "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
+    "rating": "1",
+    "price": {
+      "original": "80.00",
+      "discount": "50.00",
+      "percent": "38"
+    }
+  },
+  {
+    "id": "3",
+    "name": "Patanjali03",
+    "image": [
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image1"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image2"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image3"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image4"
+      }
+    ],
+    "categories": ["ecofriendly"],
+    "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
+    "rating": "1",
+    "price": {
+      "original": "80.00",
+      "discount": "50.00",
+      "percent": "38"
+    }
+  },
+  {
+    "id": "4",
+    "name": "Patanjali04",
+    "image": [
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image1"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image2"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image3"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image4"
+      }
+    ],
+    "categories": ["aurvedic", "organic"],
+    "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
+    "rating": "2",
+    "price": {
+      "original": "80.00",
+      "discount": "50.00",
+      "percent": "38"
+    }
+  },
+  {
+    "id": "5",
+    "name": "Patanjali05",
+    "image": [
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image1"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image2"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image3"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image4"
+      }
+    ],
+    "categories": ["organic", "natural"],
+    "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
+    "rating": "4",
+    "price": {
+      "original": "80.00",
+      "discount": "50.00",
+      "percent": "38"
+    }
+  },
+  {
+    "id": "6",
+    "name": "Patanjali06",
+    "image": [
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image1"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image2"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image3"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image4"
+      }
+    ],
+    "categories": ["natural"],
+    "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
+    "rating": "3",
+    "price": {
+      "original": "80.00",
+      "discount": "50.00",
+      "percent": "38"
+    }
+  },
+  {
+    "id": "7",
+    "name": "Patanjali07",
+    "image": [
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image1"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image2"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image3"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image4"
+      }
+    ],
+    "categories": ["aurvedic", "ecofriendly"],
+    "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
+    "rating": "5",
+    "price": {
+      "original": "80.00",
+      "discount": "50.00",
+      "percent": "38"
+    }
+  },
+  {
+    "id": "8",
+    "name": "Patanjali08",
+    "image": [
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image1"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image2"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image3"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image4"
+      }
+    ],
+    "categories": ["aurvedic", "organic", "natural", "ecofriendly"],
+    "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
+    "rating": "2",
+    "price": {
+      "original": "80.00",
+      "discount": "50.00",
+      "percent": "38"
+    }
+  },
+  {
+    "id": "9",
+    "name": "Patanjali09",
+    "image": [
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image1"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image2"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image3"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image4"
+      }
+    ],
+    "categories": ["aurvedic", "organic", "ecofriendly"],
+    "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
+    "rating": "1",
+    "price": {
+      "original": "80.00",
+      "discount": "50.00",
+      "percent": "38"
+    }
+  },
+  {
+    "id": "10",
+    "name": "Patanjali10",
+    "image": [
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image1"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image2"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image3"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image4"
+      }
+    ],
+    "categories": ["aurvedic", "natural", "ecofriendly"],
+    "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
+    "rating": "3",
+    "price": {
+      "original": "80.00",
+      "discount": "50.00",
+      "percent": "38"
+    }
+  },
+  {
+    "id": "11",
+    "name": "Patanjali11",
+    "image": [
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image1"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image2"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image3"
+      },
+      {
+        "url": "https://auravedic.com/cdn/shop/files/1kumkumadioilpackof2.png?v=1690881742&width=1200",
+        "label": "image4"
+      }
+    ],
+    "categories": ["aurvedic", "organic", "natural", "ecofriendly"],
+    "description": "Introducing Patanjali Honey a pure and natural honey product that is perfect for adding a touch of sweetness your daily life. Our honey is sourced from the purest hives and undergoes minimal processing to ensure that it retains all of its natural nutrients and enzymes.With a rich and aromatic flavor, Patanjali Honey is perfect for use in tea, baking, or as a natural sweetener for your favorite foods. It's also a great source of energy and can help to boost your immune system, making it a must-have addition to your pantry.Our honey is packaged in a convenient and easy-to-use container, making it perfect for taking with you on the go. Whether you're at home, at work, or on the road, you can enjoy the delicious taste and health benefits of Patanjali Honey anytime, anywhere.So why wait? Try Patanjali Honey today and discover the difference that pure and natural honey can make in your life!",
+    "rating": "3",
+    "price": {
+      "original": "80.00",
+      "discount": "50.00",
+      "percent": "38"
+    }
+  }
 ]

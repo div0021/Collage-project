@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback,HTMLInputTypeAttribute, InputHTMLAttributes } from "react";
+import { useRef, useState, useCallback,HTMLInputTypeAttribute, InputHTMLAttributes, ReactNode, useEffect } from "react";
 import { TbEye, TbEyeOff } from "react-icons/tb";
 import { IconType } from "react-icons";
 import { cn } from "../../lib/cn";
@@ -15,15 +15,25 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement>  {
   isSearch?:boolean;
   onClose?:()=>void;
   changeValue?:(value:string)=>void;
+  children?:ReactNode;
+  reset?:boolean
 }
 
-const Input: React.FC<InputProps> = ({ icon: Icon, disabled, isPassword,type="text",label,placeholder,className,endIcon:EndIcon,isSearch,onClose,changeValue,...props }) => {
-  const [parentHover, setParentHover] = useState<boolean>(true);
-  const [parentFocus, setParentFocus] = useState<boolean>(true);
+const Input: React.FC<InputProps> = ({ icon: Icon, disabled, isPassword,type="text",label,placeholder,className,endIcon:EndIcon,isSearch,onClose,changeValue,reset,children,...props }) => {
+  const [parentHover, setParentHover] = useState<boolean>(false);
+  const [parentFocus, setParentFocus] = useState<boolean>(false);
   const ref = useRef<HTMLInputElement>(null);
   const [showPassword,setShowPassword] = useState<boolean>(false);
 
   const [value, setValue] = useState<string>("");
+
+  useEffect(()=>{
+    if(reset){
+      setParentFocus(false);
+      setValue("");
+    }
+
+  },[reset])
 
  
   const handleClick = useCallback(() => {
@@ -35,9 +45,9 @@ const Input: React.FC<InputProps> = ({ icon: Icon, disabled, isPassword,type="te
   }, []);
   return (
     <div
-      className={cn(`w-full h-10 rounded-full border border-green-500 flex px-5 items-center relative group py-1 ${
+      className={cn(`w-full h-10 rounded-full border border-green-500 flex pl-5 items-center relative group py-1 ${
         parentFocus ? "ring-1 ring-offset-2 ring-[#679F0A]" : null
-      }`,className)}
+      } ${children ? "pr-0":"pr-5"}`,className)}
       onMouseEnter={() => setParentHover(true)}
       onMouseLeave={() => setParentHover(false)}
       onFocus={() => setParentFocus(true)}
@@ -59,7 +69,7 @@ const Input: React.FC<InputProps> = ({ icon: Icon, disabled, isPassword,type="te
       <input {...props}
         ref={ref}
         type={type}
-        className="text-sm tracking-wide flex-auto hover:outline-none focus-within:outline-none bg-red w-10 md:w-full"
+        className={cn(`text-sm tracking-wide flex-auto hover:outline-none focus-within:outline-none bg-red w-10  ${children ? "py-1 md:w-5/12 pr-5" : "py-0 md:w-full pr-0"}`)}
         onChange={(e) => {
           setValue(e.target.value)
           changeValue && changeValue(e.target.value);
@@ -80,6 +90,7 @@ const Input: React.FC<InputProps> = ({ icon: Icon, disabled, isPassword,type="te
           onClose && onClose()
         }}/>
       }
+      {children}
     </div>
   );
 };

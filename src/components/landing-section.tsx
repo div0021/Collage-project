@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Banner from "./banner";
 import TopProducts from "./top-product";
+import Testimonial from "./testimonial";
 
 const LandingSection = () => {
   const [banner, setBanner] = useState<number>(0);
@@ -22,6 +23,7 @@ const LandingSection = () => {
 
   return (
     <>
+    <div className="space-y-52 border border-red-600">
     <div className=" w-full flex justify-center">
       <div className="w-full relative h-full">
         <div className="absolute z-10 left-[48%] bottom-2 px-2 py-1 bg-gray-50/10 rounded-full flex gap-2 items-center">
@@ -102,6 +104,9 @@ const LandingSection = () => {
       </div>
     </div>
         <TopProducts />
+
+        <Testimonial />
+        </div>
     </>
   );
 };

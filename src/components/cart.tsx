@@ -3,7 +3,6 @@ import {useContext} from "react"
 import { cn } from "../lib/cn";
 import Button from "./ui/button";
 import { ProviderContext, ProviderContextType } from "./provider/provider";
-import productData from '../data/product.json'
 import CartItem from "./cart-item";
 
 interface CartProps{
@@ -11,10 +10,11 @@ interface CartProps{
     items?:[]
 }
 const Cart = ({number}:CartProps) => {
-    const {isOpen,setIsOpen} = useContext(ProviderContext) as ProviderContextType;
+    const {isOpen,setIsOpen,cartState} = useContext(ProviderContext) as ProviderContextType;
+
 
     //get cart data 
-    const cartData = productData.filter(el=>el.inCart===true);
+    const cartData = cartState.productsInCart;
 
     return (
         <>
@@ -46,10 +46,10 @@ const Cart = ({number}:CartProps) => {
 
 
                 <div className="flex flex-col flex-1">
-                   {!productData ? (
+                   {cartData.length === 0 ? (
                     <div className="w-full h-full flex flex-col justify-center items-center space-y-3">
                         <span>Your list is empty</span>
-                             <Button label="Continue Shopping" onClick={()=>{}} className="bg-black text-white w-5/12 border-none"/>
+                             <Button label="Continue Shopping" onClick={()=>{setIsOpen(false)}} className="bg-black text-white w-5/12 border-none"/>
                              
                     </div>
                    ):(

@@ -4,6 +4,7 @@ import Login from "./components/login";
 // import Modal from './components/modal'
 import Navbar from "./components/navbar";
 import Register from "./components/register";
+import Footer from "./components/footer";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Register />
         <Navbar />
         <Outlet />
+        <Footer />
       </div>
     </ComponentWrapper>
   );

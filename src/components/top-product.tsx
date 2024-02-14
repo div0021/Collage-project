@@ -7,6 +7,7 @@ const TopProducts = () => {
     
     return (
         <>
+        <div>
         <div className="w-full">
           <div className="w-full flex justify-center items-center text-center mt-10">
             <div className="space-y-1.5">
@@ -33,6 +34,7 @@ const TopProducts = () => {
               
             </div>
           </div>
+        </div>
         </div>
         </>
     )
