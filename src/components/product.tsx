@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { convertToCurrency } from "../lib/formatCurrency";
+import { formatCurrency } from "../lib/formatCurrency";
 import {
   Card,
   CardBody,
@@ -55,10 +55,10 @@ const Product = ({
         </Typography>
         <div className="flex justify-start items-center gap-x-3">
           <Typography className="line-through text-gray-400/90">
-            {convertToCurrency(orginalPrice)}
+            {formatCurrency(orginalPrice)}
           </Typography>
           <Typography className="font-semibold">
-            {convertToCurrency(price)}
+            {formatCurrency(price)}
           </Typography>
           <Typography className="text-green-500 font-bold">
             ({Math.round(discount)}% OFF)

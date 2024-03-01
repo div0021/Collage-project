@@ -16,7 +16,7 @@ const Navbar = () => {
 
                 <div className="flex items-center space-x-4 md:space-x-5 lg:space-x-10">
                 <Search />
-                <div className='hidden sm:flex flex-row justify-center items-center space-x-3 '>
+                <div className='hidden md:flex flex-row justify-center items-center space-x-3 '>
                 <NavSection />
               </div>
               <div className="flex items-center gap-3  md:gap-5">

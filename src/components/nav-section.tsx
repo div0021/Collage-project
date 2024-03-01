@@ -6,9 +6,12 @@ import {
 } from "@material-tailwind/react";
 import { SlArrowUp } from "react-icons/sl";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NavSection = () => {
   const [openCategory, setOpenCategory] = useState<boolean>(false);
+  const navigate = useNavigate()
+
   return (
     <>
       <div className="flex items-center space-x-2">
@@ -41,7 +44,7 @@ const NavSection = () => {
             </div>
           </MenuHandler>
           <MenuList className="w-52 overflow-x-hidden pr-10">
-            <MenuItem>Ayurvedic</MenuItem>
+            <MenuItem onClick={()=>navigate("/category/ayurvedic")}>Ayurvedic</MenuItem>
             <MenuItem>Organic</MenuItem>
             <MenuItem>Eco-friendly</MenuItem>
           </MenuList>

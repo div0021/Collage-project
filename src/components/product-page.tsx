@@ -15,6 +15,7 @@ import productData from "../data/product.json"
 import { CartActionKind, ProviderContext, ProviderContextType } from "./provider/provider";
 import { IoAdd } from "react-icons/io5";
 import {RiSubtractFill} from "react-icons/ri"
+import { formatCurrency } from "../lib/formatCurrency";
 
 
 
@@ -53,7 +54,7 @@ const ProductPage = () => {
                       </TabPanel>
                     ))}
                   </TabsBody>
-                  <TabsHeader className="bg-transparent space-x-5 justify-center">
+                  <TabsHeader className="bg-transparent space-x-5 justify-center relative z-0">
                     {product.image.map((el) => (
                       <Tab key={el.label} value={el.label} className="w-12">
                         <img className="w-12 h-12 rounded-full" src={el.url} alt="image" />
@@ -70,8 +71,8 @@ const ProductPage = () => {
                 </div>
 
                 <div className="flex justify-start items-baseline space-x-2">
-                  <p className="line-through opacity-80">₹{product.price.original}</p>
-                  <p className="font-semibold">₹{product.price.original}</p>
+                  <p className="line-through opacity-80">{formatCurrency(Number(product.price.original))}</p>
+                  <p className="font-semibold">₹{formatCurrency(Number(product.price.discount))}</p>
                   <p className="text-xs text-green-500 font-semibold">{product.price.percent}% off</p>
                 </div>
 

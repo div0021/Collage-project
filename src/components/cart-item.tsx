@@ -30,18 +30,18 @@ const CartItem = ({description,discount,image,name,percentage,price,quantity,id}
 
 
   return (
-    <Card className="w-full flex-row">
-        <CardHeader className="m-0 w-1/5 shrink-0 rounded-r-none">
+    <Card className="w-full flex-col sm:flex-row">
+        <CardHeader className="m-0 w-full sm:w-1/5 shrink-0 rounded-r-none flex items-center justify-center">
             <img 
             src={image}
             alt={name}
-            className="h-full w-full object-cover"
+            className=" w-28 h-full sm:w-full object-cover"
             />
 
         </CardHeader>
     
     <CardBody className="flex w-full">
-        <div className="w-3/4 mr-auto flex flex-col space-y-1">
+        <div className="w-3/4 sm:mr-auto flex flex-col space-y-1">
             <h6 className="font-semibold tracking-wide">{name}</h6>
             <div>
                 <p className="text-xs line-clamp-2">

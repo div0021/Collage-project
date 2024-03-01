@@ -1,5 +1,5 @@
 
-export function convertToCurrency(number: number): string {
+export function formatCurrency(number: number): string {
     const formatter = new Intl.NumberFormat('en-IN', {
       style: 'currency',
       currency: 'INR',
