@@ -3,11 +3,11 @@ import ComponentWrapper from "../component-wrapper";
 import { IoFilterCircleOutline } from "react-icons/io5";
 import { Option, Select } from "@material-tailwind/react";
 
-interface AyurvedicProps {
-  // Define your component props here
-}
+// interface AyurvedicProps {
+//   // Define your component props here
+// }
 
-const Ayurvedic = ({}: AyurvedicProps) => {
+const Ayurvedic = () => {
   return (
     <div className="w-full">
       <ComponentWrapper>
