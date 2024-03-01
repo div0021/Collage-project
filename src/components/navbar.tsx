@@ -19,7 +19,7 @@ const Navbar = () => {
                 <div className='hidden sm:flex flex-row justify-center items-center space-x-3 '>
                 <NavSection />
               </div>
-              <div className="flex items-center gap-5">
+              <div className="flex items-center gap-3  md:gap-5">
                 <img src="/leaves.png" alt="leaves" className="w-5 h-5"/>
                 <Cart number={5}/>
               </div>

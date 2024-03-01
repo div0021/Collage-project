@@ -18,7 +18,7 @@ const Cart = ({number}:CartProps) => {
 
     return (
         <>
-        <div className="relative cursor-pointer" onClick={()=>setIsOpen(true)} aria-disabled={!isOpen}>
+        <div className="relative cursor-pointer shrink-0" onClick={()=>setIsOpen(true)} aria-disabled={!isOpen}>
             <div className="absolute h-1.5 w-1.5 font-semibold text-xs text-white -right-2 -top-1 p-1 bg-[#679F0A] rounded-xl flex items-center justify-center">{number}</div>
             <img src="/shopping-cart.png" alt="shopping cart" className="w-5 h-5"/>
             </div>
