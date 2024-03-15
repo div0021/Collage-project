@@ -7,12 +7,16 @@ import { formatCurrency } from "../../lib/formatCurrency";
 import FilterSection from "./FilterSection";
 import Product from "../product";
 import TotalProducts from "../../data/product.json";
+import { useState } from "react";
+import { cn } from "../../lib/cn";
+import { useAppDispatch } from "../../app/hooks";
+import { onFilterOpen } from "../../app/features/filterSlice";
 
 // interface AyurvedicProps {
 //   // Define your component props here
 // }
 
-const data: FilterOptionProps[] = [
+export const data: FilterOptionProps[] = [
   { label: "Supplements" },
   { label: "Herbal Teas" },
   { label: "Skincare" },
@@ -23,7 +27,7 @@ const data: FilterOptionProps[] = [
   { label: "Immunity Booseter" },
 ];
 
-const price: FilterOptionProps[] = [
+export const price: FilterOptionProps[] = [
   { label: `<= ${formatCurrency(100)}` },
   { label: `${formatCurrency(100)} - ${formatCurrency(500)}` },
   { label: `${formatCurrency(500)} - ${formatCurrency(1000)}` },
@@ -32,9 +36,21 @@ const price: FilterOptionProps[] = [
   { label: `>= ${formatCurrency(2000)}` },
 ];
 const Ayurvedic = () => {
+  const [showFilter,setShowFilter] = useState<boolean>(false);
   const productData = TotalProducts.filter(
     (el) => el.categories.indexOf("aurvedic") !== -1
   );
+
+
+  const dispatch = useAppDispatch();
+
+  const handleFilterClick = () => {
+    if(window.innerWidth <= 960){
+      dispatch(onFilterOpen());
+    }else{
+      setShowFilter(pre=>!pre)
+    }
+  }
   return (
     <div className="w-full">
       <ComponentWrapper>
@@ -61,7 +77,7 @@ const Ayurvedic = () => {
             {/* Filter */}
 
             <div className="mt-14 sm:mt-20 space-y-3 sm:space-y-0 sm:flex justify-between items-center">
-              <div className="flex justify-start items-center h-10 w-32 rounded-full cursor-pointer p-2 gap-x-3 border border-green-900 hover:bg-green-200/50 transition-all duration-300 ease-in-out text-green-800">
+              <div className="flex justify-start items-center h-10 w-32 rounded-full cursor-pointer p-2 gap-x-3 border border-green-900 hover:bg-green-200/50 transition-all duration-300 ease-in-out text-green-800" onClick={handleFilterClick}>
                 <IoFilterCircleOutline className="h-10 w-10" />
                 <p className="text-xl font-medium tracking-wider">Filter</p>
               </div>
@@ -75,14 +91,19 @@ const Ayurvedic = () => {
               </div>
             </div>
 
+            {/* For Large Screens */}
+
             <div className="flex mt-5">
-              <div className="hidden lg:block lg:w-1/4 space-y-5">
+              <div className={cn("hidden lg:block lg:w-1/4 space-y-5",{"lg:hidden" : showFilter})}>
                 <FilterSection filterHeading="Sub Categories" data={data} />
                 <FilterSection filterHeading="Price" data={price} />
               </div>
 
+              {/* Small screen */}
+
+              
               {/* List Ayurvedic Products */}
-              <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-3">
+              <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-3 gap-3">
                 {productData.map((el) => (
                   <div className="flex justify-center items-center" key={el.id}>
                     <Product

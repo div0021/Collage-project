@@ -19,7 +19,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement>  {
   reset?:boolean
 }
 
-const Input: React.FC<InputProps> = ({ icon: Icon, disabled, isPassword,type="text",label,placeholder,className,endIcon:EndIcon,isSearch,onClose,changeValue,reset,children,...props }) => {
+const Input: React.FC<InputProps> = ({ icon: Icon, disabled, isPassword,type="text",label,placeholder,className,endIcon:EndIcon,isSearch,onClose,changeValue,reset,children,required,...props }) => {
   const [parentHover, setParentHover] = useState<boolean>(false);
   const [parentFocus, setParentFocus] = useState<boolean>(false);
   const ref = useRef<HTMLInputElement>(null);
@@ -61,7 +61,7 @@ const Input: React.FC<InputProps> = ({ icon: Icon, disabled, isPassword,type="te
             : "px-0 translate-x-7 -translate-y-0.5"
         }`}
       >
-        {label}
+        {label}{required && (parentHover || parentFocus || value) && <span className="text-red-500">*</span>}
       </label>
 
       <Icon className={`w-5 h-5 mr-2   transition-all duration-300 ease-in-out ${parentFocus || parentHover ? "opacity-90":"opacity-60"}`} />

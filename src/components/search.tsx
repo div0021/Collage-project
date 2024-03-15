@@ -1,11 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {BiSearch} from "react-icons/bi"
 import Input from "./ui/input";
 import {FiSearch} from "react-icons/fi"
 import { RxCross2 } from "react-icons/rx";
-import { ProviderContext, ProviderContextType } from "./provider/provider";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { onSearchClose, onSearchOpen, selectSearchOpen } from "../app/features/searchSlice";
+
 const Search = () => {
-    const {searchOpen,setSearchOpen} = useContext(ProviderContext) as ProviderContextType;
+
+    const searchOpen = useAppSelector(selectSearchOpen);
+    const dispatch = useAppDispatch()
     const [open,setOpen] = useState<boolean>(searchOpen);
    
     useEffect(()=>{
@@ -21,7 +25,7 @@ const Search = () => {
 
     return (
         <div>
-             <div className="flex flex-row justify-center items-center" onClick={()=>setSearchOpen(true)}>
+             <div className="flex flex-row justify-center items-center" onClick={()=>dispatch(onSearchOpen())}>
                 <BiSearch className="w-6 h-6 cursor-pointer text-gray-400 hover:text-gray-700 transition-all duration-150 ease-in-out relative top-0.5"/>
              </div>
 
@@ -34,7 +38,7 @@ const Search = () => {
                           <Input icon={FiSearch} placeholder="Search here..." autoFocus endIcon={RxCross2} isSearch onClose={()=>{
                             setOpen(false);
                             setTimeout(()=>{
-                                setSearchOpen(false)
+                                dispatch(onSearchClose())
                             },300);
                             
                             }}  

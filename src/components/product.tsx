@@ -42,7 +42,7 @@ const Product = ({
       >
         <img src={image} alt={name} />
       </CardHeader>
-      <CardBody className="spacey2">
+      <CardBody className="space-y-2">
         <Typography variant="h4" color="blue-gray">
           {name}
         </Typography>

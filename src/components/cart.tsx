@@ -1,28 +1,29 @@
 import { RxCross2 } from "react-icons/rx";
-import { useContext } from "react";
 import { cn } from "../lib/cn";
 import Button from "./ui/button";
-import { ProviderContext, ProviderContextType } from "./provider/provider";
 import CartItem from "./cart-item";
 import { formatCurrency } from "../lib/formatCurrency";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import {onCartClose, onCartOpen, selectCartOpen, selectCartProduct } from "../app/features/cartSlice";
 
 interface CartProps {
   number: number;
   items?: [];
 }
 const Cart = ({ number }: CartProps) => {
-  const { isOpen, setIsOpen, cartState } = useContext(
-    ProviderContext
-  ) as ProviderContextType;
 
-  //get cart data
-  const cartData = cartState.productsInCart;
+
+  const isOpen = useAppSelector(selectCartOpen);
+  const cartData = useAppSelector(selectCartProduct);
+
+  const dispatch = useAppDispatch()
+
 
   return (
     <>
       <div
         className="relative cursor-pointer shrink-0"
-        onClick={() => setIsOpen(true)}
+        onClick={() => dispatch(onCartOpen())}
         aria-disabled={!isOpen}
       >
         <div className="absolute h-1.5 w-1.5 font-semibold text-xs text-white -right-2 -top-1 p-1 bg-[#679F0A] rounded-xl flex items-center justify-center">
@@ -49,7 +50,7 @@ const Cart = ({ number }: CartProps) => {
             "opacity-100 translate-x-0": isOpen,
           }
         )}
-        onClick={() => setIsOpen(false)}
+        onClick={() => dispatch(onCartClose())}
       >
         <div
           className={cn(
@@ -66,7 +67,7 @@ const Cart = ({ number }: CartProps) => {
             </h2>
             <RxCross2
               className="w-5 h-5 cursor-pointer"
-              onClick={() => setIsOpen(false)}
+              onClick={() => dispatch(onCartClose())}
             />
           </div>
           {/* TODO: Add items based on condition */}
@@ -78,9 +79,9 @@ const Cart = ({ number }: CartProps) => {
                 <Button
                   label="Continue Shopping"
                   onClick={() => {
-                    setIsOpen(false);
+                    dispatch(onCartClose());
                   }}
-                  className="bg-black text-white w-5/12 border-none"
+                  className="bg-black text-white w-2/3 py-5 max-w-[12rem] sm:w-5/12 border-none"
                 />
               </div>
             ) : (
@@ -107,13 +108,13 @@ const Cart = ({ number }: CartProps) => {
 
           {/* Total Price */}
 
-          <div className="w-full pt-5 px-5 flex justify-start items-center">
+          {cartData.length!==0 && <div className="w-full pt-5 px-5 flex justify-start items-center">
             <div className="flex items-center justify-between w-[calc(100%-3rem)]">
               <h6 className="text-xl">Total: {formatCurrency(2000)}</h6>
 
               <Button label="Continue" onClick={() => {}} className="w-52" />
             </div>
-          </div>
+          </div>}
         </div>
       </div>
     </>

@@ -9,8 +9,8 @@ import{
 } from "react-icons/md"
 
 import { FaTrash } from "react-icons/fa";
-import { CartActionKind, ProviderContext, ProviderContextType } from "./provider/provider";
-import { useContext } from "react";
+import { useAppDispatch } from "../app/hooks";
+import { removeProductToCart } from "../app/features/cartSlice";
 
 interface CartItemProps{
     name:string,
@@ -25,8 +25,8 @@ interface CartItemProps{
 
 const CartItem = ({description,discount,image,name,percentage,price,quantity,id}:CartItemProps) => {
 
-    const {dispatch} = useContext(ProviderContext) as ProviderContextType;
-
+    // const {dispatch} = useContext(ProviderContext) as ProviderContextType;
+    const dispatch = useAppDispatch()
 
 
   return (
@@ -67,7 +67,7 @@ const CartItem = ({description,discount,image,name,percentage,price,quantity,id}
             </div>
         </div>
         <div className="flex justify-center items-center">
-            <IconButton className="bg-red-400" onClick={()=> dispatch({type:CartActionKind.REMOVE,payload:Number(id) && Number(id)})}><FaTrash /> </IconButton>
+            <IconButton className="bg-red-400" onClick={()=> dispatch(removeProductToCart(id))}><FaTrash /> </IconButton>
         </div>
 
     </CardBody>

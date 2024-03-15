@@ -1,17 +1,19 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useState } from "react";
 import {PiSignIn} from "react-icons/pi"
 import {FaUserCircle} from "react-icons/fa"
 import { cn } from "../lib/cn";
-import { ProviderContext, ProviderContextType } from "./provider/provider";
 import { CiLogout } from "react-icons/ci";
+import { useAppDispatch } from "../app/hooks";
+import { onLoginOpen } from "../app/features/loginSlice";
 const UserSection = () => {
 
     const [isOpen,setIsOpen] = useState<boolean>(false);
-    const {setLoginOpen} = useContext(ProviderContext) as ProviderContextType;
+
+    const dispatch = useAppDispatch();
 
     const handleClick = useCallback(() => {
-        setLoginOpen(true);
-    },[setLoginOpen]);
+        dispatch(onLoginOpen());
+    },[dispatch]);
     
     // implement logout
     const isLogin = false;

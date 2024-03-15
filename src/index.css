@@ -5,7 +5,20 @@
 *{
   margin: 0;
   padding: 0;
-  box-sizing: content-box;
+  box-sizing: border-box;
+  font-family:  'Poppins', sans-serif;
+}
+
+#selectOptionBox::-webkit-scrollbar,p::-webkit-scrollbar {
+  display: none;
+}
+#selectOptionBox,p{
+  scrollbar-width: none;
+}
+
+:root{
+  --primary:#D2E9BB;
+  --secondary:#679F0A;
 }
 
 input:-webkit-autofill,
