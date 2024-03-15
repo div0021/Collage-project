@@ -1,15 +1,10 @@
 import { FaRegUserCircle } from "react-icons/fa";
 import ComponentWrapper from "./component-wrapper";
 import Input from "./ui/input";
-import { LiaIndustrySolid } from "react-icons/lia";
 import { AiOutlineMail } from "react-icons/ai";
 import { MdLocalPhone } from "react-icons/md";
 import Select from "./ui/select";
 
-
-interface ShippingDetailsProps {
-  // Define your component props here
-}
 
 const data = [
   {
@@ -35,7 +30,7 @@ const data = [
 ];
 
 
-const ShippingDetails = ({}: ShippingDetailsProps) => {
+const ShippingDetails = () => {
   return (
     <div className='w-full pt-32'>
        <ComponentWrapper>
