@@ -6,6 +6,7 @@ import Navbar from "./components/navbar";
 import Register from "./components/register";
 import Footer from "./components/footer";
 import FilterMobile from "./components/categories/FilterMobile";
+import PersonalSurveyForm from "./components/personal-survey-form";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         {/* <Modal actionLabel='Update' footer="" isOpen={true} onClose={()=>{}} onSubmit={()=>{}} title='Your profile'/> */}
         <Login />
         <Register />
+        <PersonalSurveyForm />
         <div className="lg:hidden">
           <FilterMobile />
         </div>

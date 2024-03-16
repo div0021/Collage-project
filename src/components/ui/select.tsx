@@ -3,7 +3,7 @@ import { cn } from "../../lib/cn";
 import { FaAngleDown } from "react-icons/fa";
 // import { useAppDispatch } from "../app/hooks";
 // import { setSort } from "../app/features/filterSlice";
-import { Country } from "country-state-city";
+// import { Country } from "country-state-city";
 
 
 interface SelectProps {
@@ -50,7 +50,7 @@ const Select = ({name,data}:SelectProps) => {
     }, 300);
   };
 
-  console.log(Country.getAllCountries());
+  // console.log(Country.getAllCountries());
 
   return (
     <div
@@ -69,7 +69,7 @@ const Select = ({name,data}:SelectProps) => {
 
       <div
         className={cn(
-          "absolute w-full top-14 p-1 shadow-sm shadow-secondary rounded-xl bg-green-50 transition-all duration-300 translate-y-5 ease-in-out opacity-0 hidden gap-y-1 max-h-44 overflow-scroll",
+          "absolute z-10 w-full top-14 p-1 shadow-sm shadow-secondary rounded-xl bg-green-50 transition-all duration-300 translate-y-5 ease-in-out opacity-0 hidden gap-y-1 max-h-44 overflow-scroll",
           { "block opacity-0": open, "opacity-100 translate-y-0": anotherOpen }
         )} id="selectOptionBox"
       >

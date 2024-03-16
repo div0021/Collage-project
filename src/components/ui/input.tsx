@@ -45,7 +45,7 @@ const Input: React.FC<InputProps> = ({ icon: Icon, disabled, isPassword,type="te
   }, []);
   return (
     <div
-      className={cn(`w-full h-10 rounded-full border border-green-500 flex pl-5 items-center relative group py-1 ${
+      className={cn(`w-full h-12 rounded-full border border-green-500 flex pl-5 items-center relative group py-1 ${
         parentFocus ? "ring-1 ring-offset-2 ring-[#679F0A]" : null
       } ${children ? "pr-0":"pr-5"}`,className)}
       onMouseEnter={() => setParentHover(true)}

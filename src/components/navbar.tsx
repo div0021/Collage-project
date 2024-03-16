@@ -19,7 +19,7 @@ const Navbar = () => {
               </div>
               <div className="flex items-center gap-3  md:gap-5">
                 <img src="/leaves.png" alt="leaves" className="w-5 h-5"/>
-                <Cart number={5}/>
+                <Cart />
               </div>
               
               <UserSection />

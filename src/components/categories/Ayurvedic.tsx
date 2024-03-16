@@ -76,13 +76,13 @@ const Ayurvedic = () => {
 
             {/* Filter */}
 
-            <div className="mt-14 sm:mt-20 space-y-3 sm:space-y-0 sm:flex justify-between items-center">
-              <div className="flex justify-start items-center h-10 w-32 rounded-full cursor-pointer p-2 gap-x-3 border border-green-900 hover:bg-green-200/50 transition-all duration-300 ease-in-out text-green-800" onClick={handleFilterClick}>
+            <div className="mt-14 sm:mt-20 space-y-5 sm:space-y-0 sm:flex justify-between items-center">
+              <div className="flex justify-start items-center h-14 w-32 rounded-full cursor-pointer p-2 gap-x-3 border border-green-900 hover:bg-green-200/50 transition-all duration-300 ease-in-out text-green-800" onClick={handleFilterClick}>
                 <IoFilterCircleOutline className="h-10 w-10" />
                 <p className="text-xl font-medium tracking-wider">Filter</p>
               </div>
-              <div className="w-80 sm:w-72">
-                <Select label="Sort by" className="h-5 w-[91.5%] sm:w-[260.5px]">
+              <div className="w-80 sm:w-72 mb">
+                <Select label="Sort by" className="h-10 w-full sm:w-[288.5px]">
                   <Option value="dsc">Price (high to low)</Option>
                   <Option value="asc">Price (low to high)</Option>
                   <Option value="feature">Feature</Option>

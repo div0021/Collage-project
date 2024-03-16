@@ -6,15 +6,14 @@ import { formatCurrency } from "../lib/formatCurrency";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import {onCartClose, onCartOpen, selectCartOpen, selectCartProduct } from "../app/features/cartSlice";
 
-interface CartProps {
-  number: number;
-  items?: [];
-}
-const Cart = ({ number }: CartProps) => {
+
+const Cart = () => {
 
 
   const isOpen = useAppSelector(selectCartOpen);
   const cartData = useAppSelector(selectCartProduct);
+
+  const number = cartData.length;
 
   const dispatch = useAppDispatch()
 
@@ -26,9 +25,9 @@ const Cart = ({ number }: CartProps) => {
         onClick={() => dispatch(onCartOpen())}
         aria-disabled={!isOpen}
       >
-        <div className="absolute h-1.5 w-1.5 font-semibold text-xs text-white -right-2 -top-1 p-1 bg-[#679F0A] rounded-xl flex items-center justify-center">
-          {number}
-        </div>
+        {number>0 && <div className="absolute h-3 w-3 font-medium text-[10px] text-white -right-2 -top-1 bg-[#679F0A] rounded-xl flex items-end justify-center">
+          <span className="h-[12.5px]">{number}</span>
+        </div>}
         <img src="/shopping-cart.png" alt="shopping cart" className="w-5 h-5" />
       </div>
 

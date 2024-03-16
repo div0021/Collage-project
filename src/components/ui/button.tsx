@@ -20,7 +20,7 @@ const Button:React.FC<ButtonProps> = ({
     className
 })=>{
     return (
-        <button onClick={onClick} disabled={disabled} className={cn(`relative disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-80 border border-transparent hover:border-[#679F0A] transition hover:ring-2 hover:ring-offset-2 hover:ring:ring-[#679F0A] w-full 
+        <button onClick={onClick} disabled={disabled} className={cn(`relative disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-80 border border-transparent hover:border-[#679F0A] transition-all duration-200 ease-in-out hover:ring-2 hover:ring-offset-2 hover:ring:ring-[#679F0A] w-full 
         ${outline ? 'bg-transparent':"bg-[#679F0A]"}
         ${outline ? 'border-black text-black':"border-[#679F0A] text-black"}
         ${small ? "py-1 text-sm font-light border-[1px]" : "py-3 text-md font-semibold border-2"}

@@ -8,7 +8,8 @@ export default withMT({
       colors: {
         "primary":"var(--primary)",
         "secondary":"var(--secondary)",
-      }
+      },
+      screen: { xs: "400px" }
     },
   },
   plugins: [],
