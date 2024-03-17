@@ -1,4 +1,3 @@
-import Input from "./ui/input";
 import { IoLockClosedOutline, IoMailOutline } from "react-icons/io5";
 import Button from "./ui/button";
 import { FaGoogle } from "react-icons/fa";
@@ -6,11 +5,72 @@ import { RxCross2 } from "react-icons/rx";
 import { useEffect, useState } from "react";
 import { CiLogin } from "react-icons/ci";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { onRegisterClose, selectRegisterOpen } from "../app/features/registerSlice";
+import {
+  onRegisterClose,
+  selectRegisterOpen,
+} from "../app/features/registerSlice";
 import { onLoginOpen } from "../app/features/loginSlice";
-const Register = () => {
+import { UseFormRegister, useForm } from "react-hook-form";
+import FormInput from "./ui/form-input";
+import {
+  CreateUserInput,
+  createUserSchema,
+  handleErrorResponse,
+} from "../lib/schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useSignupMutation } from "../app/services/authApiSlice";
+import { toast } from "react-toastify";
+import { FormDataType } from "../lib/types";
 
+
+const Register = () => {
   const dispatch = useAppDispatch();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<CreateUserInput>({
+    resolver: zodResolver(createUserSchema),
+    defaultValues: {
+      name: "",
+      confirmPassword: "",
+      email: "",
+      password: "",
+    },
+  });
+
+  const [signup, { isLoading }] = useSignupMutation();
+
+  const onSubmit = async (values: CreateUserInput) => {
+    console.log(values);
+    try {
+      const response = await signup({
+        ...values,
+        passwordConfirmation: values.confirmPassword,
+      }).unwrap();
+      console.log(response);
+      toast.success("Registration Successful");
+      reset();
+      setOpen(false);
+      setTimeout(() => {
+        dispatch(onRegisterClose());
+        dispatch(onLoginOpen());
+      }, 300);
+      setTimeout(() => {
+        toast("Please login to continue", { hideProgressBar: true });
+      }, 1000);
+    } catch (errors) {
+      const { status } = handleErrorResponse.parse(errors);
+      if (status === 409) toast.error("This email already exist!");
+      else {
+        toast.error("unknown registration error");
+        console.log("Error:: ", errors);
+      }
+    }
+  };
+
   const registerOpen = useAppSelector(selectRegisterOpen);
 
   const [open, setOpen] = useState<boolean | undefined>(registerOpen);
@@ -22,11 +82,12 @@ const Register = () => {
   if (!registerOpen) {
     return null;
   }
+
   return (
     <div
       className={`h-full fixed overflow-x-hidden bg-gray-800/90 inset-0 flex justify-center items-center z-50 focus:outline-none outline-none overflow-hidden`}
     >
-      <div className="relative w-full md:w-5/6 lg:w-4/6 max-w-screen-md mx-auto h-[40rem] sm:h-96 rounded-xl lg:max-h-96 ">
+      <div className="relative w-full md:w-5/6 lg:w-4/6 max-w-screen-md mx-auto h-full sm:h-[32rem] rounded-xl lg:max-h-[50rem] ">
         <div
           className={`translate duration-300  h-full w-full ${
             open ? "translate-y-0" : "translate-y-full"
@@ -47,7 +108,7 @@ const Register = () => {
                   setTimeout(() => {
                     dispatch(onRegisterClose());
                     dispatch(onLoginOpen());
-                  },300);
+                  }, 300);
                 }}
               >
                 SignIn
@@ -65,47 +126,74 @@ const Register = () => {
               />
             </div>
             <div className="h-full py-6 sm:py-0 w-full sm:w-3/5 bg-white flex-auto flex flex-col justify-center items-center">
-              <form className="flex flex-col justify-center items-center gap-6">
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="flex flex-col justify-center items-center gap-8"
+              >
                 <h1 className="text-xl lg:text-3xl mb-3">
                   Create a new account
                 </h1>
 
-                <Input
+                <FormInput
+                  label="Name"
+                  type="text"
+                  icon={IoMailOutline}
+                  name="name"
+                  register={register as UseFormRegister<FormDataType>}
+                  className="w-60 md:w-full"
+                  errors={errors.name}
+                  disabled={isLoading}
+                />
+
+                <FormInput
                   label="Email"
                   type="email"
                   icon={IoMailOutline}
-                  className=" w-60 md:w-full"
+                  name="email"
+                  register={register as UseFormRegister<FormDataType>}
+                  className="w-60 md:w-full"
+                  errors={errors.email}
+                  disabled={isLoading}
                 />
 
-                <Input
+                <FormInput
                   label="Password"
                   type="password"
                   icon={IoLockClosedOutline}
                   isPassword={true}
+                  name="password"
+                  register={register as UseFormRegister<FormDataType>}
                   className="w-60 md:w-full"
+                  errors={errors.password}
+                  disabled={isLoading}
                 />
 
-                <Input
+                <FormInput
                   label="Confirm Password"
                   type="password"
                   icon={IoLockClosedOutline}
                   isPassword={true}
+                  name="confirmPassword"
+                  register={register as UseFormRegister<FormDataType>}
                   className="w-60 md:w-full"
+                  errors={errors.confirmPassword}
+                  disabled={isLoading}
                 />
 
                 <Button
                   label="SignUp"
-                  onClick={() => {
-                    //TODO login
-                  }}
+                  onClick={() => {}}
+                  loading={isLoading}
+                  type="submit"
                   className="rounded-full hover:text-white transition-all ease-in-out duration-100"
+                  disabled={isLoading}
                   icon={CiLogin}
                 />
               </form>
             </div>
           </div>
           <button
-            className="absolute -right-2 -top-2 p-1 bg-red-600 flex iemc justify-center text-white rounded-full"
+            className="absolute top-0.5 right-0.5 md:-right-2 md:-top-2 p-1 bg-red-600 flex iemc justify-center text-white rounded-full"
             onClick={() => {
               setOpen(false);
               setTimeout(() => {

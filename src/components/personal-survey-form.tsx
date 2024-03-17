@@ -95,7 +95,7 @@ const PersonalSurveyForm = () => {
 
   const [scrollWidth, setScrollWidth] = useState<number>(0);
 
-  const [surveyOpen,setSurveyOpen] = useState<boolean>(true);
+  const [surveyOpen,setSurveyOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
