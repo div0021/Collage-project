@@ -9,10 +9,11 @@
   font-family:  'Poppins', sans-serif;
 }
 
-#selectOptionBox::-webkit-scrollbar,p::-webkit-scrollbar {
+#selectOptionBox::-webkit-scrollbar,p::-webkit-scrollbar,
+div::-webkit-scrollbar {
   display: none;
 }
-#selectOptionBox,p{
+#selectOptionBox,p,div{
   scrollbar-width: none;
 }
 

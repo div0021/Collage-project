@@ -1,5 +1,6 @@
 import { apiSlice } from "../api/apiSlice"
 import { logOut, setCredentials } from "../features/authSlice";
+import { setSurveyOpen } from "../features/surveySlice";
 
 export interface RegisterRequest{
     name:string;
@@ -49,7 +50,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
                         dispatch(apiSlice.util.resetApiState());
                     },1000)  
                  }catch(error){
-                    console.error("[LogOut Error]",error)
+                    console.error("[LogOut Error]")
                  }
             }
         }),
@@ -59,10 +60,21 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 method:"GET",
             }),
             async onQueryStarted(_,{dispatch,queryFulfilled}){
+                try{
                 const response = await queryFulfilled
 
                 dispatch(setCredentials(response.data))
-                // console.log("User data",data.);
+
+                const userSurvey = response.data.userSurvey
+
+                if(userSurvey === false){
+                   dispatch(setSurveyOpen())
+                }
+                
+                }catch(e){
+                    console.log("No user found!")
+                    dispatch(logOut())
+                }
             }
         })
     })

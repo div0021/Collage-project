@@ -14,6 +14,9 @@ import { useCurrentUserMutation, useLoginMutation } from "../app/services/authAp
 import { LoginUserInput, handleErrorResponse, loginUserSchema } from "../lib/schema";
 import FormInput from "./ui/form-input";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { getGoogleOAuthURL } from "../lib/getGoogleUrl";
+
 const Login = () => {
 
   const dispatch = useAppDispatch();
@@ -34,19 +37,19 @@ const Login = () => {
   const [login,{isLoading}] = useLoginMutation()
   const [currentUser,{isLoading:currentUserLoading}] = useCurrentUserMutation()
 
+
   const onSubmit = async (values: LoginUserInput) => {
     // console.log(values);
 
     try {
       // login
-       await login({
-        ...values}).unwrap();
+       await login({password:values.password as string,email:values.email as string}).unwrap();
 
 //  Get current user
       await currentUser('').unwrap()
+      reset();
 
       toast.success("Login Successful");
-      reset();
       setOpen(false);
       setTimeout(() => {
         dispatch(onLoginClose());
@@ -107,14 +110,20 @@ const Login = () => {
 
               <div className="h-0.5 w-52 bg-[#679F0A]/50 rounded-full" />
 
-              <Button
+              {/* <Button
                 label="Google"
                 onClick={() => {
                   //TOdo google login
                 }}
                 className="rounded-full w-60 sm:w-36 lg:w-48"
                 icon={FaGoogle}
-              />
+              /> */}
+
+              <a href={getGoogleOAuthURL()} className="px-5 py-3 bg-green-500/50 text-center rounded-full flex justify-center items-center">
+                <FaGoogle className="w-4 h-4 mr-2" />
+                <span>Google</span>
+
+              </a>
             </div>
             <div className="h-full w-full sm:w-3/5 bg-white flex-auto py-5 flex flex-col justify-center items-center">
               <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center items-center gap-2">
@@ -145,9 +154,14 @@ const Login = () => {
                   disabled={isLoading}
                 />
 
-                <p className="text-end  w-full text-sm mb-2 cursor-pointer hover:text-[#679F0A] hover:underline">
+                <Link className="text-end  w-full text-sm mb-2 cursor-pointer hover:text-[#679F0A] hover:underline" to="/forgetPassword" onClick={()=>{
+                    setOpen(false);
+                    setTimeout(() => {
+                      dispatch(onLoginClose());
+                    }, 300);
+                }}>
                   Forget Password?
-                </p>
+                </Link>
 
                 <Button
                   label="Login"

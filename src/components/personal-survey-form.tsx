@@ -7,6 +7,8 @@ import FilterOption from "./categories/FilterOption";
 import { Radio } from "@material-tailwind/react";
 import Button from "./ui/button";
 import { cn } from "../lib/cn";
+import { useAppDispatch } from "../app/hooks";
+import {  setSurveyClose } from "../app/features/surveySlice";
 
 
 const genderData = [
@@ -89,13 +91,16 @@ const DiseaseSymptoms=[
 const PersonalSurveyForm = () => {
 
 
+  const surveyOpen = false;
+  // const surveyOpen = useAppSelector(selectSurveyOpen);
   const [open, setOpen] = useState<boolean | undefined>(false);
+  const dispatch = useAppDispatch()
 
   const [surveyComplete,setSurveyComplete] = useState<boolean>(false);
 
   const [scrollWidth, setScrollWidth] = useState<number>(0);
 
-  const [surveyOpen,setSurveyOpen] = useState<boolean>(false);
+  // const [surveyOpen,setSurveyOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -232,7 +237,7 @@ const PersonalSurveyForm = () => {
                 {/* Tobacco */}
 
                 <div className="w-full">
-                  <p className="text-sm">Do you use any kind of tobacco or have you ever used them?</p>
+                  <label htmlFor="tobacco" className="text-sm">Do you use any kind of tobacco or have you ever used them?</label>
                   <div className="flex justify-start items-center gap-x-10 text-sm">
                     <Radio crossOrigin={""} name="tobacco" label="Yes" />
                     <Radio crossOrigin={""} name="tobacoo" label="No" />
@@ -264,7 +269,7 @@ const PersonalSurveyForm = () => {
                       setSurveyComplete(false)
                     },1700)
                     setTimeout(()=>{
-                      setSurveyOpen(false)
+                      dispatch(setSurveyClose())
                     },2000)
                     
                     }} className="w-52 rounded-full hover:text-white"/>

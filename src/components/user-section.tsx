@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { PiSignIn } from "react-icons/pi";
 import { FaUserCircle } from "react-icons/fa";
 import { cn } from "../lib/cn";
@@ -6,20 +6,33 @@ import { CiLogout } from "react-icons/ci";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { onLoginOpen } from "../app/features/loginSlice";
 import { selectCurrentUser } from "../app/features/authSlice";
-import { useLogOutMutation } from "../app/services/authApiSlice";
+import { useCurrentUserMutation, useLogOutMutation } from "../app/services/authApiSlice";
 import { toast } from "react-toastify";
+
+
 const UserSection = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
 
+  const [currentUser,{isLoading:userLoading}] = useCurrentUserMutation()
+
+  useEffect(()=>{
+    const getUser = async () => {
+       await currentUser('')
+    }
+    getUser();
+
+  },[]);
+
   const handleClick = useCallback(() => {
+    setIsOpen(false);
     dispatch(onLoginOpen());
   }, [dispatch]);
 
-  const currentUser = useAppSelector(selectCurrentUser);
+  const user = useAppSelector(selectCurrentUser);
 
-  const [logOut, { isLoading }] = useLogOutMutation();
+  const [logOut, { isLoading:logOutLoading }] = useLogOutMutation();
 
   const handleLogOut = async () => {
 
@@ -33,13 +46,13 @@ const UserSection = () => {
   };
 
   // implement logout
-  const isLogin = currentUser !== null;
+  const isLogin = user !== null;
 
   return (
     <div
       className="flex items-center p-2 rounded-3xl bg-[#D2E9BB] gap-2 cursor-pointer relative z-10"
-      onMouseEnter={() => setIsOpen((pre) => !pre)}
-      onMouseLeave={() => setIsOpen((pre) => !pre)}
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
     >
       <div className="">
         <img src="/menu.png" alt="user menu" className="w-6 h-6" />
@@ -64,7 +77,7 @@ const UserSection = () => {
             <button
               className="flex items-center hover:bg-gray-200/80 p-2 text-sm"
               onClick={handleLogOut}
-              disabled={isLoading}
+              disabled={logOutLoading || userLoading}
             >
               <PiSignIn className="w-5 h-5 mr-2" />
               LogOut

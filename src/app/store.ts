@@ -5,6 +5,7 @@ import registerReducer from "./features/registerSlice"
 import filterReducer from "./features/filterSlice"
 import searchReducer from "./features/searchSlice"
 import authReducer from "./features/authSlice"
+import surveyReducer from "./features/surveySlice"
 import { apiSlice } from './api/apiSlice'
 
 export const store = configureStore({
@@ -15,6 +16,7 @@ export const store = configureStore({
         filter:filterReducer,
         search:searchReducer,
         auth:authReducer,
+        survey:surveyReducer,
         [apiSlice.reducerPath]:apiSlice.reducer,
     },
     middleware:getDefaultMiddleware => getDefaultMiddleware().concat(apiSlice.middleware)

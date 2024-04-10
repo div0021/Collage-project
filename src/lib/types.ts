@@ -15,39 +15,9 @@ export type ProductDataType = {
   categories: string[];
 };
 
-// export type RegisterFormDataType = {
-//   email: string;
-//   password: string;
-//   confirmPassword: string;
-//   name:string;
-// };
-// export type RegisterFormDataType = {
-//     registeremail:string;
-//     registerpassword:string;
-//     registerconfirmPassword:string;
-//   }
-
-export type RegisterValidFieldNames =
-  | "email"
-  | "password"
-  | "confirmPassword"
-  | "name"
-
-// export type LoginFormDataType = {
-//   email: string;
-//   password: string;
-// };
-//   export type LoginFormDataType = {
-//     loginemail:string;
-//     loginpassword:string;
-//   }
-
-export type LoginValidFieldNames = "email" | "password";
-
-export type FormDataType = {
-  email: string;
-  password: string;
-} & ({ confirmPassword: string; name:string; } |{forget?:string});
-
-export type ValidFieldNames = LoginValidFieldNames | RegisterValidFieldNames;
-
+export type CategoryDataType = {
+  _id:string;
+  name:string;
+  description:string;
+  subCategories:string[]
+}

@@ -10,7 +10,7 @@ import {
   selectRegisterOpen,
 } from "../app/features/registerSlice";
 import { onLoginOpen } from "../app/features/loginSlice";
-import { UseFormRegister, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import FormInput from "./ui/form-input";
 import {
   CreateUserInput,
@@ -20,7 +20,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSignupMutation } from "../app/services/authApiSlice";
 import { toast } from "react-toastify";
-import { FormDataType } from "../lib/types";
 
 
 const Register = () => {
@@ -44,15 +43,17 @@ const Register = () => {
   const [signup, { isLoading }] = useSignupMutation();
 
   const onSubmit = async (values: CreateUserInput) => {
-    console.log(values);
+    // console.log(values);
     try {
-      const response = await signup({
-        ...values,
-        passwordConfirmation: values.confirmPassword,
+       await signup({
+        name:values.name as string,
+        email:values.email as string,
+        password:values.password as string,
+        passwordConfirmation: values.confirmPassword as string,
       }).unwrap();
-      console.log(response);
-      toast.success("Registration Successful");
       reset();
+      toast.success("Registration Successful");
+      
       setOpen(false);
       setTimeout(() => {
         dispatch(onRegisterClose());
@@ -139,7 +140,7 @@ const Register = () => {
                   type="text"
                   icon={IoMailOutline}
                   name="name"
-                  register={register as UseFormRegister<FormDataType>}
+                  register={register}
                   className="w-60 md:w-full"
                   errors={errors.name}
                   disabled={isLoading}
@@ -150,7 +151,7 @@ const Register = () => {
                   type="email"
                   icon={IoMailOutline}
                   name="email"
-                  register={register as UseFormRegister<FormDataType>}
+                  register={register}
                   className="w-60 md:w-full"
                   errors={errors.email}
                   disabled={isLoading}
@@ -162,7 +163,7 @@ const Register = () => {
                   icon={IoLockClosedOutline}
                   isPassword={true}
                   name="password"
-                  register={register as UseFormRegister<FormDataType>}
+                  register={register}
                   className="w-60 md:w-full"
                   errors={errors.password}
                   disabled={isLoading}
@@ -174,7 +175,7 @@ const Register = () => {
                   icon={IoLockClosedOutline}
                   isPassword={true}
                   name="confirmPassword"
-                  register={register as UseFormRegister<FormDataType>}
+                  register={register}
                   className="w-60 md:w-full"
                   errors={errors.confirmPassword}
                   disabled={isLoading}

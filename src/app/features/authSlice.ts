@@ -3,10 +3,18 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store';
 import { getObjectFromLocalStorage, removeObjectFromLocalStorage, storeObjectInLocalStorage } from '../../lib/user-store';
 
+export enum  UserRoles {
+    ADMIN = 'admin',
+    USER = 'user'
+}
 
 export type UserInfoTypes={
     name:string;
     email:string;
+    role: UserRoles;
+    isEmailVerified:boolean,
+    userSurvey:boolean,
+    image?:string,
     createdAt:Date;
     updatedAt:Date;
     id:string;
@@ -14,7 +22,7 @@ export type UserInfoTypes={
 
 export interface AuthState {
     // Define your state types here
-    user: UserInfoTypes | null
+    user: UserInfoTypes | null;
 }
 
 const SaveState = getObjectFromLocalStorage<UserInfoTypes>('user');
@@ -28,6 +36,7 @@ const initialState: AuthState = {
 
 export const authSlice = createSlice({
     name: 'auth', 		
+    // initialState: initialState, 	
     initialState: SaveState ? {user:SaveState}:initialState, 	
     reducers: {
          setCredentials:(state,action:PayloadAction<Omit<UserInfoTypes,"id"> & {_id:string}>) =>{

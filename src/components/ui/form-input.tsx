@@ -2,11 +2,10 @@ import { useState, useCallback,HTMLInputTypeAttribute, InputHTMLAttributes, Reac
 import { TbEye, TbEyeOff } from "react-icons/tb";
 import { IconType } from "react-icons";
 import { cn } from "../../lib/cn";
-import { FieldError, UseFormRegister } from "react-hook-form";
-import { FormDataType, ValidFieldNames } from "../../lib/types";
+import { FieldError, FieldValues, Path, PathValue, UseFormRegister } from "react-hook-form";
 
 
-interface FormInputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,HTMLInputElement> {
+interface FormInputProps<T extends FieldValues> extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,HTMLInputElement> {
   icon: IconType;
   isPassword?: boolean;
   disabled?: boolean;
@@ -20,22 +19,22 @@ interface FormInputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInput
   changeValue?:(value:string)=>void;
   children?:ReactNode;
   reset?:boolean;
-  register:UseFormRegister<FormDataType>;
+  register:UseFormRegister<T>;
   errors?:FieldError;
-  name:ValidFieldNames
+  name:Path<T>
 }
 
-const FormInput: React.FC<FormInputProps> = ({ icon: Icon, disabled, isPassword,type="text",label,placeholder,className,endIcon:EndIcon,isSearch,onClose,changeValue,reset,children,register,errors,name,required,...props }) => {
+function FormInput<T extends FieldValues>({ icon: Icon, disabled, isPassword,type="text",label,placeholder,className,endIcon:EndIcon,isSearch,onClose,changeValue,reset,children,register,errors,name,required,...props }:FormInputProps<T>) {
   const [parentHover, setParentHover] = useState<boolean>(false);
   const [parentFocus, setParentFocus] = useState<boolean>(false);
   const [showPassword,setShowPassword] = useState<boolean>(false);
 
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState<PathValue<T,Path<T>>>();
 
   useEffect(()=>{
     if(reset){
       setParentFocus(false);
-      setValue("");
+      setValue(undefined);
     }
 
   },[reset])
@@ -45,6 +44,7 @@ const FormInput: React.FC<FormInputProps> = ({ icon: Icon, disabled, isPassword,
       setShowPassword(pre=>!pre)
 
   }, []);
+
   return (
     <div
       className={cn(`w-full h-12 rounded-full border border-green-500 flex pl-5 items-center relative group py-1 transition-all duration-300 ease-in-out ${
@@ -60,8 +60,8 @@ const FormInput: React.FC<FormInputProps> = ({ icon: Icon, disabled, isPassword,
         className={`absolute transition-all duration-200 ease-in-out bg-white text-sm md:text-base ${
           parentHover || parentFocus 
           || value
-            ? " text-sm -translate-x-1 -translate-y-7 px-1"
-            : "px-0 translate-x-7 -translate-y-0"
+            ? " text-sm -translate-x-1 -translate-y-7 scale-90 px-1"
+            : "px-0 translate-x-7 scale-100 -translate-y-0"
         } ${errors ? "text-red-500":"text-black"}`}
       >
         {label}{required && (parentHover || parentFocus 
@@ -102,5 +102,5 @@ const FormInput: React.FC<FormInputProps> = ({ icon: Icon, disabled, isPassword,
       {children}
     </div>
   );
-};
+}
 export default FormInput;

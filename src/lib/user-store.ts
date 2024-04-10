@@ -12,7 +12,6 @@ export function storeObjectInLocalStorage<T>(key: string, obj: T): void {
 export function getObjectFromLocalStorage<T>(key: string): T | null {
     // Retrieve the JSON string from the local storage
     const jsonStr = localStorage.getItem(key);
-    
     // Parse the JSON string to convert it back to an object
     if (jsonStr) {
         return JSON.parse(jsonStr) as T;
