@@ -7,7 +7,6 @@ import { ProductSchemaType, productSchema } from "../../lib/schema";
 import FormInput from "../ui/form-input";
 import FormTextArea from "../ui/form-textarea";
 import FormSelect from "../ui/form-select";
-import FilterOption from "../categories/FilterOption";
 import Button from "../ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
@@ -18,6 +17,7 @@ import axios, { AxiosError } from "axios";
 import { CategoryDataType } from "../../lib/types";
 import {SiBrandfolder} from "react-icons/si"
 import { useNavigate } from "react-router-dom";
+import AdminFilterOption from "./AdminFilterOption";
 
 const CreateProduct = () => {
   const [images, setImages] = useState<string[]>([]);
@@ -130,7 +130,6 @@ const CreateProduct = () => {
 
   const onSubmit =async (values:ProductSchemaType) => {
 
-    // console.log(values);
 
     if(images.length!== 4){
       toast.error("Upload 4 product images!");
@@ -245,12 +244,12 @@ const CreateProduct = () => {
             {/* Featured */}
 
             <div className="w-full flex justify-start items-center">
-            <FilterOption label="Featured" handleCheck={handleFeatured}  />
+            <AdminFilterOption label="Featured" handleCheck={handleFeatured}  />
             </div>
 
             {/* Archived */}
             <div className="w-full flex justify-start items-center">
-            <FilterOption label="Archived" handleCheck={handleArchived} />
+            <AdminFilterOption label="Archived" handleCheck={handleArchived} />
 
             </div>
 
@@ -275,7 +274,7 @@ const CreateProduct = () => {
                   <p className="mt-2 ml-2">Choose a category...</p>
                 )}
               {activeSubCategories.length > 0 && (activeSubCategories.map(el=>(
-                <FilterOption key={el} label={el} handlemultipleCheck={handleSubCategory} className="w-auto"/>
+                <AdminFilterOption key={el} label={el} handlemultipleCheck={handleSubCategory} className="w-auto"/>
               )))}
 
               </div>

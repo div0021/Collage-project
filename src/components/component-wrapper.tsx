@@ -1,8 +1,14 @@
-import { PropsWithChildren } from "react";
+import { ReactNode } from "react";
+import { cn } from "../lib/cn";
 
-const ComponentWrapper = ({children}:PropsWithChildren) => {
+interface ComponentWrapperProps{
+    children:ReactNode;
+    className?:string;
+}
+
+const ComponentWrapper = ({children,className}:ComponentWrapperProps) => {
     return (
-        <div className="w-full h-auto flex flex-col items-center sm:overflow-x-hidden relative z-0">
+        <div className={cn("w-full h-auto flex flex-col items-center sm:overflow-x-hidden relative z-0",className)}>
             <div className="w-full h-auto min-w-[310px] max-w-[1640px]">
               {children}
             </div>

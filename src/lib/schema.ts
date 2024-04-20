@@ -93,3 +93,17 @@ export type ProductType = Omit<ProductSchemaType,"category"> & {
     subCategories:string[]
   };
 }
+
+// personal survey schema
+
+export const personalSurveySchema = z.object({
+  firstName:z.string().min(3,"first name required!"),
+  lastName:z.string().min(2,"last name required!"),
+  age: z.coerce.number().positive("Age should be positive number"),
+  contact:z.string().refine(value => /^\d{10}$/.test(value), {
+    message: 'Input must be a 10-digit phone number',
+  })
+});
+
+export type PersonalSurveyType = z.TypeOf<typeof personalSurveySchema>
+

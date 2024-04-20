@@ -6,18 +6,16 @@ import FilterMobile from '../categories/FilterMobile';
 import { Outlet } from 'react-router-dom';
 import Footer from '../footer';
 import Navbar from '../navbar';
+import Profile from '../profile';
 
-interface LayoutProps {
-  // Define your component props here
-}
+const Layout = () => {
 
-const Layout = ({}: LayoutProps) => {
   return (
     <ComponentWrapper>
       <div className="w-full relative pt-16 sm:pt-0 md:pt-0">
-        {/* <Modal actionLabel='Update' footer="" isOpen={true} onClose={()=>{}} onSubmit={()=>{}} title='Your profile'/> */}
         <Login />
         <Register />
+        <Profile />
         <PersonalSurveyForm />
         <div className="lg:hidden">
           <FilterMobile />

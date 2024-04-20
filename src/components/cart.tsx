@@ -4,7 +4,14 @@ import Button from "./ui/button";
 import CartItem from "./cart-item";
 import { formatCurrency } from "../lib/formatCurrency";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import {onCartClose, onCartOpen, selectCartOpen, selectCartProduct } from "../app/features/cartSlice";
+import {addProductToCart, onCartClose, onCartOpen, selectCartOpen, selectCartProduct } from "../app/features/cartSlice";
+import { calculateDiscountedPrice } from "../lib/calculateDiscountedPrice";
+import { useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { GoTriangleDown } from "react-icons/go";
+import { selectCurrentUser } from "../app/features/authSlice";
+import { onLoginOpen } from "../app/features/loginSlice";
 
 
 const Cart = () => {
@@ -13,21 +20,63 @@ const Cart = () => {
   const isOpen = useAppSelector(selectCartOpen);
   const cartData = useAppSelector(selectCartProduct);
 
+  const navigate = useNavigate()
+
   const number = cartData.length;
 
   const dispatch = useAppDispatch()
 
+  const currentUser = useAppSelector(selectCurrentUser);
+
+  useEffect(()=>{
+    const getCartData = async () => {
+      const url = import.meta.env.VITE_SERVER_URL;
+
+      try{
+        const response = await axios.get(`${url}/api/cart`,{withCredentials:true});
+
+        dispatch(addProductToCart(response.data.cartData.products));
+
+        // console.log(response.data)
+      }catch(e){
+        console.log("Error",e);
+      }
+    }
+    getCartData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+
+  let totalPrice = 0;
+
+  if(cartData.length>0){
+
+    totalPrice = cartData.reduce((accumulator:number, currentValue) =>{
+      return accumulator + calculateDiscountedPrice(currentValue.data.price, currentValue.data.discount) * currentValue.quantity
+
+  },0)
+}
+
 
   return (
-    <>
+    <div>
       <div
-        className="relative cursor-pointer shrink-0"
+        className="relative cursor-pointer shrink-0 group"
         onClick={() => dispatch(onCartOpen())}
         aria-disabled={!isOpen}
       >
         {number>0 && <div className="absolute h-3 w-3 font-medium text-[10px] text-white -right-2 -top-1 bg-[#679F0A] rounded-xl flex items-end justify-center">
           <span className="h-[12.5px]">{number}</span>
         </div>}
+
+
+      <GoTriangleDown className="w-5 h-5 absolute -top-4 left-0 text-green-200 opacity-0 group-hover:opacity-100 pointer-events-none" />
+
+      <div className="opacity-0 group-hover:opacity-100 pointer-events-none  absolute bottom-7 -left-3 text-sm bg-green-200 p-1 rounded-lg">
+        <div className='w-full hover:bg-white p-1 rounded-full flex justify-start items-center transition-all text-xs duration-300 ease-in-out'>
+          <span>Cart</span>
+        </div>
+      </div>
+
         <img src="/shopping-cart.png" alt="shopping cart" className="w-5 h-5" />
       </div>
 
@@ -69,35 +118,47 @@ const Cart = () => {
               onClick={() => dispatch(onCartClose())}
             />
           </div>
-          {/* TODO: Add items based on condition */}
 
           <div className="mt-3 flex flex-col h-[calc(100%-10rem)] overflow-y-auto">
             {cartData.length === 0 ? (
               <div className="w-full h-full flex flex-col justify-center items-center space-y-3">
-                <span>Your list is empty</span>
+                {currentUser ? (<><span>Your list is empty</span>
                 <Button
                   label="Continue Shopping"
                   onClick={() => {
                     dispatch(onCartClose());
                   }}
                   className="bg-black text-white w-2/3 py-5 max-w-[12rem] sm:w-5/12 border-none"
+                /></>):(
+                  <>
+                  <span>You are not logged In</span>
+                <Button
+                  label="Login to Continue"
+                  onClick={() => {
+                    dispatch(onCartClose());
+                    dispatch(onLoginOpen())
+                  }}
+                  className="bg-black text-white w-2/3 py-5 max-w-[12rem] sm:w-5/12 border-none"
                 />
+                  
+                  </>
+                )}
               </div>
             ) : (
               <div>
                 {/* Add items */}
                 <div className="space-y-3">
-                  {cartData.map((el) => (
+                  {cartData.length > 0 && cartData.map((el) => (
                     <CartItem
-                      key={el.id}
-                      id={el.id}
-                      description={el.description}
-                      discount={el.price.discount}
-                      image={el.image[0].url}
-                      name={el.name}
-                      percentage={el.price.percent}
-                      price={el.price.original}
-                      quantity="4"
+                      key={el.data._id}
+                      id={el.data._id}
+                      description={el.data.description}
+                      discount={String(Math.round((calculateDiscountedPrice(el.data.price,el.data.discount))))}
+                      image={el.data.images[0]}
+                      name={el.data.name}
+                      percentage={String(el.data.discount)}
+                      price={String(el.data.price)}
+                      quantity={String(el.quantity)}
                     />
                   ))}
                 </div>
@@ -109,14 +170,19 @@ const Cart = () => {
 
           {cartData.length!==0 && <div className="w-full pt-5 px-5 flex justify-start items-center">
             <div className="flex items-center justify-between w-[calc(100%-3rem)]">
-              <h6 className="text-xl">Total: {formatCurrency(2000)}</h6>
+              <h6 className="text-xl">Total: {formatCurrency(totalPrice)}</h6>
 
-              <Button label="Continue" onClick={() => {}} className="w-52" />
+              <Button label="Continue" onClick={() => {
+                dispatch(onCartClose())
+                setTimeout(()=>{
+                  navigate("/cart");
+                },500)
+              }} className="w-52" />
             </div>
           </div>}
         </div>
       </div>
-    </>
+      </div>
   );
 };
 export default Cart;

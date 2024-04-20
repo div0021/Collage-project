@@ -7,7 +7,6 @@ import { ProductSchemaType, ProductType, productSchema } from "../../lib/schema"
 import FormInput from "../ui/form-input";
 import FormTextArea from "../ui/form-textarea";
 import FormSelect from "../ui/form-select";
-import FilterOption from "../categories/FilterOption";
 import Button from "../ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
@@ -19,6 +18,7 @@ import { CategoryDataType } from "../../lib/types";
 import {SiBrandfolder} from "react-icons/si"
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { getObjectFromLocalStorage, removeObjectFromLocalStorage } from "../../lib/user-store";
+import AdminFilterOption from "./AdminFilterOption";
 
 const UpdateProduct = () => {
 
@@ -265,12 +265,12 @@ const UpdateProduct = () => {
             {/* Featured */}
 
             <div className="w-full flex justify-start items-center">
-            <FilterOption label="Featured" handleCheck={handleFeatured} active={isFeatured} />
+            <AdminFilterOption  label="Featured" handleCheck={handleFeatured} active={isFeatured} />
             </div>
 
             {/* Archived */}
             <div className="w-full flex justify-start items-center">
-            <FilterOption label="Archived" handleCheck={handleArchived} active={isArchived} />
+            <AdminFilterOption label="Archived" handleCheck={handleArchived} active={isArchived} />
 
             </div>
 
@@ -295,7 +295,7 @@ const UpdateProduct = () => {
                   <p className="mt-2 ml-2">Choose a category...</p>
                 )}
               {activeSubCategories.length > 0 && (activeSubCategories.map(el=>(
-                <FilterOption key={el} label={el} handlemultipleCheck={handleSubCategory} className="w-auto" actives={subCategory} />
+                <AdminFilterOption key={el} label={el} handlemultipleCheck={handleSubCategory} className="w-auto" actives={subCategory} />
               )))}
 
               </div>

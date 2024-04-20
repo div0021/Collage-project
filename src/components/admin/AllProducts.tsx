@@ -81,7 +81,7 @@ const AllProducts = () => {
     <div className='w-full mt-32 px-5 min-h-screen min-w-[600px] shrink-0 overflow-x-scroll sm:overflow-x-hidden'>
 
        <div className="w-full flex justify-between items-center">
-        <h1 className='text-3xl font-body text-black'>All Products</h1>
+        <h1 className='text-3xl font-body text-black'>All Products({products.length})</h1>
 
         <Button label='Add product' onClick={()=>{navigate("/admin/products/create")}} icon={FaStore} className='w-52 font-medium' />
        </div>
@@ -231,7 +231,6 @@ const AllProducts = () => {
 
       <div className="opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto absolute bottom-8 -left-6 text-sm bg-gray-200 p-1 rounded-lg">
         <Link to={`/admin/products/${el._id}`} className='w-full hover:bg-white p-1 rounded-lg flex justify-start items-center transition-all duration-300 ease-in-out' onClick={()=>{
-          console.log(el._id);
           storeObjectInLocalStorage<ProductType>(`${el._id}`,el)
         }}>
           <MdOutlineModeEdit className="w-4 h-4 mr-2" />

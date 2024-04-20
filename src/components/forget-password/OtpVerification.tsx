@@ -6,7 +6,7 @@ import OtpInput from "react-otp-input";
 import { useState } from "react";
 import { cn } from "../../lib/cn";
 import axios, { AxiosError } from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 
 const OtpVerification = () => {
@@ -52,18 +52,6 @@ const OtpVerification = () => {
 
   return (
     <div className="w-full h-screen max-h-screen">
-            <ToastContainer 
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        />
       <ComponentWrapper>
         <div className="w-full h-screen border border-red-500 flex justify-center items-center">
           <div className="flex flex-col justify-center items-center gap-y-5 w-96 px-5 py-8 rounded shadow shadow-gray-400">

@@ -2,6 +2,15 @@ import { Typography } from "@material-tailwind/react";
 import NewsLetter from "./newsletter";
 import { MdOutlineLocationOn, MdOutlineMail } from "react-icons/md";
 import { PiPhoneCall } from "react-icons/pi";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { useNavigate } from "react-router-dom";
+import { onLoginOpen } from "../app/features/loginSlice";
+import { onRegisterOpen } from "../app/features/registerSlice";
+import { onProfileOpen, selectUserProfile } from "../app/features/profileSlice";
+import { onFavouriteOpen } from "../app/features/favouriteSlice";
+import { scrollTop } from "../lib/scrollTop";
+import { selectCurrentUser } from "../app/features/authSlice";
+import { toast } from "react-toastify";
 
 const OURADDRESS = [
     {
@@ -24,14 +33,6 @@ const OURADDRESS = [
 
 const SITEMAP = [
     {
-      title: "Quick Shop",
-      links: ["Sign In", "Create an Account", "My Account", "Wishlist"],
-    },
-    {
-      title: "Categories",
-      links: ["Natural", "Eco-friendly", "Organic", "Ayurvedic"],
-    },
-    {
         title: "Information",
         links: ["About Us", "What is Ayurveda?", "Ayurveda Wellness", "FAQ's","Privacy Policy","Terms & Conditions", "Sitemap"],
       },
@@ -41,8 +42,17 @@ const SITEMAP = [
   const currentYear = new Date().getFullYear();
 
 const Footer = () => {
+
+  const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
+
+  const currentUser = useAppSelector(selectCurrentUser);
+
+  const profile = useAppSelector(selectUserProfile);
+
     return (
-        <footer className="mt-10 space-y-10">
+        <footer className="mt-10 space-y-10 w-full">
                 <NewsLetter />
           <div className="w-full bg-black">
             <div className="mx-auto w-full max-w-7xl px-8">
@@ -71,8 +81,123 @@ const Footer = () => {
               </ul>
             </div>
 
-          {SITEMAP.map(({ title, links }, key) => (
-            <div key={key} className="w-full">
+            <div className="w-full">
+              <Typography
+                variant="small"
+                color="amber"
+                className="mb-4 font-bold uppercase opacity-50"
+              >
+                QUICK SHOP
+              </Typography>
+              <ul className="space-y-1">
+
+                {/* Login */}
+                  <Typography as="li" className="font-normal">
+                    <p
+                      className="inline-block py-1 pr-2 transition-transform hover:scale-105 text-white/50 hover:text-white cursor-pointer" onClick={()=>{
+                        if(currentUser){
+                          toast.info("You are already logged in.")
+                        }else{
+                          dispatch(onLoginOpen())
+                        }
+                      }}
+                    >
+                      Sign In
+                    </p>
+                  </Typography>
+
+                  {/* Sign up */}
+                  <Typography as="li" className="font-normal">
+                    <p
+                      className="inline-block py-1 pr-2 transition-transform hover:scale-105 text-white/50 hover:text-white cursor-pointer" onClick={()=>{
+                        if(currentUser){
+                          toast.info("You are already logged in.")
+                        }else{
+                          dispatch(onRegisterOpen())
+                        }
+                      }}
+                    >
+                      Create an Account
+                    </p>
+                  </Typography>
+
+                  {/* profile */}
+                  <Typography as="li" className="font-normal">
+                    <p
+                      className="inline-block py-1 pr-2 transition-transform hover:scale-105 text-white/50 hover:text-white cursor-pointer" onClick={()=>{
+
+                        if(profile){
+                          dispatch(onProfileOpen())
+
+                        }else{
+                          toast.info("Please login!")
+
+                        }}}
+
+                    >
+                      My Account
+                    </p>
+                  </Typography>
+                  <Typography as="li" className="font-normal">
+                    <p
+                      className="inline-block py-1 pr-2 transition-transform hover:scale-105 text-white/50 hover:text-white cursor-pointer" onClick={()=>{dispatch(onFavouriteOpen())}}
+                    >
+                      Wishlist
+                    </p>
+                  </Typography>
+              </ul>
+            </div>
+
+            {/* Categories */}
+            <div className="w-full">
+              <Typography
+                variant="small"
+                color="amber"
+                className="mb-4 font-bold uppercase opacity-50"
+              >
+                CATEGORIES
+              </Typography>
+              <ul className="space-y-1">
+
+                {/* Eco-friendly */}
+                  <Typography as="li" className="font-normal">
+                    <p
+                      className="cursor-pointer inline-block py-1 pr-2 transition-transform hover:scale-105 text-white/50 hover:text-white" onClick={()=>{navigate("/category/ecofriendly")
+                      scrollTop()
+                      }}
+                    >
+                      Eco-friendly
+                    </p>
+                  </Typography>
+
+                  {/* Organic */}
+                  <Typography as="li" className="font-normal">
+                    <p
+                      className="cursor-pointer inline-block py-1 pr-2 transition-transform hover:scale-105 text-white/50 hover:text-white" onClick={()=>{navigate("/category/organic");
+                      scrollTop()
+                      }}
+                    >
+                      Organic
+                    </p>
+                  </Typography>
+
+                  {/* Ayurvedic */}
+                  <Typography as="li" className="font-normal">
+                    <p
+                      className="cursor-pointer inline-block py-1 pr-2 transition-transform hover:scale-105 text-white/50 hover:text-white" onClick={()=>{navigate('/category/ayurvedic')
+                        scrollTop()
+                      }}
+                    >
+                      Ayurvedic
+                    </p>
+                  </Typography>
+              </ul>
+            </div>
+
+            {/* Information */}
+
+            {SITEMAP.map(({links,title}) => (
+            <div className="w-full" key={title}>
               <Typography
                 variant="small"
                 color="amber"
@@ -81,19 +206,19 @@ const Footer = () => {
                 {title}
               </Typography>
               <ul className="space-y-1">
-                {links.map((link, key) => (
-                  <Typography key={key} as="li" className="font-normal">
-                    <a
-                      href="#"
+                {links.map(link=>
+                  <Typography as="li" key={link} className="font-normal">
+                    <a href="#"
                       className="inline-block py-1 pr-2 transition-transform hover:scale-105 text-white/50 hover:text-white"
                     >
                       {link}
+                      
                     </a>
                   </Typography>
-                ))}
+            )}
               </ul>
-            </div>
-          ))}
+            </div>))
+}
         </div>
         <div className="flex w-full flex-col items-center justify-center border-t border-blue-gray-50 py-4 md:flex-row md:justify-between">
           <Typography

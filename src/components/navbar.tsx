@@ -3,8 +3,13 @@ import Logo from "./logo";
 import Search from "./search";
 import Cart from "./cart";
 import UserSection from "./user-section";
+import Favourite from "./favourite";
+import { useAppSelector } from "../app/hooks";
+import { selectCurrentUser } from "../app/features/authSlice";
 
 const Navbar = () => {
+
+  const currentUser = useAppSelector(selectCurrentUser);
 
 
     return (
@@ -18,12 +23,19 @@ const Navbar = () => {
                 <NavSection />
               </div>
               <div className="flex items-center gap-3  md:gap-5">
-                <img src="/leaves.png" alt="leaves" className="w-5 h-5"/>
+                <div className="relative group cursor-pointer">
+
+                  <Favourite />
+                </div>
                 <Cart />
               </div>
               
               <UserSection />
                 </div>
+
+                {currentUser && !currentUser.isEmailVerified && (<div className="absolute w-80 -bottom-5 bg-red-500 right-3 rounded-b text-white font-medium px-3 text-sm">
+                  Please verify you mail.
+                </div>)}
                 
             </div>
 

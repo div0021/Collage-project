@@ -8,6 +8,11 @@ import { onLoginOpen } from "../app/features/loginSlice";
 import { selectCurrentUser } from "../app/features/authSlice";
 import { useCurrentUserMutation, useLogOutMutation } from "../app/services/authApiSlice";
 import { toast } from "react-toastify";
+import { resetFavourite } from "../app/features/favouriteSlice";
+import { resetCart } from "../app/features/cartSlice";
+import { onProfileOpen } from "../app/features/profileSlice";
+import { MdOutlineInventory } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 
 const UserSection = () => {
@@ -16,6 +21,8 @@ const UserSection = () => {
   const dispatch = useAppDispatch();
 
   const [currentUser,{isLoading:userLoading}] = useCurrentUserMutation()
+
+  const navigate = useNavigate();
 
   useEffect(()=>{
     const getUser = async () => {
@@ -39,6 +46,8 @@ const UserSection = () => {
     try{
     await logOut("");
     toast.success("Logout successfully");
+    dispatch(resetFavourite());
+    dispatch(resetCart())
     }catch(error){
         toast.error("LogOut failed! Try again.")
         console.log("LogOutError::",error);
@@ -70,9 +79,19 @@ const UserSection = () => {
       >
         {isLogin ? (
           <>
-            <div className="flex items-center hover:bg-gray-200/80 p-2 text-sm">
+            <div className="flex items-center hover:bg-gray-200/80 p-2 text-sm" onClick={()=>{
+              setIsOpen(false);
+              dispatch(onProfileOpen())
+            }}>
               <FaUserCircle className="w-5 h-5 mr-2" />
               Profile
+            </div>
+            <div className="flex items-center hover:bg-gray-200/80 p-2 text-sm" onClick={()=>{
+              setIsOpen(false);
+              navigate("/orders");
+            }}>
+              <MdOutlineInventory className="w-5 h-5 mr-2" />
+              My orders
             </div>
             <button
               className="flex items-center hover:bg-gray-200/80 p-2 text-sm"

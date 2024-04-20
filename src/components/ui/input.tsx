@@ -73,7 +73,7 @@ const Input: React.FC<InputProps> = ({ icon: Icon, disabled, isPassword,type="te
         className={cn(`text-sm tracking-wide flex-auto hover:outline-none focus-within:outline-none bg-red w-10  ${children ? "py-1 md:w-5/12 pr-5" : "py-0 md:w-full pr-0"}`)}
         onChange={(e) => {
           setValue(e.target.value)
-          changeValue && changeValue(e.target.value);
+          changeValue && changeValue(String(e.target.value));
         }}
         value={value}
         disabled={disabled}

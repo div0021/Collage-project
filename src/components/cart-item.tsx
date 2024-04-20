@@ -11,6 +11,7 @@ import{
 import { FaTrash } from "react-icons/fa";
 import { useAppDispatch } from "../app/hooks";
 import { removeProductToCart } from "../app/features/cartSlice";
+import axios from "axios";
 
 interface CartItemProps{
     name:string,
@@ -25,8 +26,22 @@ interface CartItemProps{
 
 const CartItem = ({description,discount,image,name,percentage,price,quantity,id}:CartItemProps) => {
 
-    // const {dispatch} = useContext(ProviderContext) as ProviderContextType;
+    
     const dispatch = useAppDispatch()
+
+    const  handleRemoveFromCart= async ()=>{
+        const url = import.meta.env.VITE_SERVER_URL;
+
+        try{
+            await axios.put(`${url}/api/cart`,{productId:id,action:false,quantity:1},{withCredentials:true});
+
+            dispatch(removeProductToCart(id))
+
+        }catch(error){
+            console.log("Error",error);
+        }
+
+    }
 
 
   return (
@@ -67,7 +82,7 @@ const CartItem = ({description,discount,image,name,percentage,price,quantity,id}
             </div>
         </div>
         <div className="flex justify-center items-center">
-            <IconButton className="bg-red-400" onClick={()=> dispatch(removeProductToCart(id))}><FaTrash /> </IconButton>
+            <IconButton className="bg-red-400" onClick={handleRemoveFromCart}><FaTrash /> </IconButton>
         </div>
 
     </CardBody>

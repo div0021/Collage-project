@@ -5,14 +5,14 @@ import userData from "../data/user-testimonial.json";
 const Testimonial = () => {
   return (
     <div className="w-full border-2 mt-10">
-      <div className="pb-10 bg-gray-500/50">
+      <div className="pb-10 bg-[#708090]/70">
         <Carousel
           loop
           autoplay
           transition={{ type: "spring", duration: 0.5 }}
           className="rounded-xl"
           navigation={({ setActiveIndex, activeIndex, length }) => (
-            <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2 items-center">
+            <div className="absolute bottom-4 left-2/4 z-10 flex -translate-x-2/4 gap-2 items-center">
               {new Array(length).fill("").map((_, i) => (
                 <span
                   key={i}

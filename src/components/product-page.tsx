@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import {
   Button,
   IconButton,
-  Rating,
   Tab,
   TabPanel,
   Tabs,
@@ -10,8 +9,7 @@ import {
   TabsHeader,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
-import { BiLeaf } from "react-icons/bi";
-import productData from "../data/product.json";
+import { BiLeaf, BiSolidLeaf } from "react-icons/bi";
 import { IoAdd } from "react-icons/io5";
 import { RiSubtractFill } from "react-icons/ri";
 import { formatCurrency } from "../lib/formatCurrency";
@@ -21,23 +19,76 @@ import {
   onCartOpen,
   selectCartProduct,
 } from "../app/features/cartSlice";
+import { getObjectFromLocalStorage } from "../lib/user-store";
+import { ProductType } from "../lib/schema";
+import { calculateDiscountedPrice } from "../lib/calculateDiscountedPrice";
+import CircularLoader from "./loaders/circular-loader";
+import axios from "axios";
+import { MdAddShoppingCart } from "react-icons/md";
+import { addProductToFavourite, selectFavouriteProduct } from "../app/features/favouriteSlice";
 
 const ProductPage = () => {
   const { productId } = useParams();
+  const favourite = useAppSelector(selectFavouriteProduct);
+
 
   const dispatch = useAppDispatch();
   const cartProduct = useAppSelector(selectCartProduct);
 
-  const product = productData.filter((el) => el.id === productId)[0];
-
   const [quantity, setQuantity] = useState<number>(1);
 
   const isPresentInCart =
-    cartProduct.filter((item) => item.id === productId).length > 0;
+    cartProduct.length > 0 && cartProduct.filter((item) => item.data._id === productId).length > 0;
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const [product] = useState(getObjectFromLocalStorage<ProductType>('productdata'));
+
+  if(!product){
+    return( <div className="pt-52 w-full h-2/3 flex justify-center items-center"><CircularLoader /></div>)
+  }
+  const discountedPrice = calculateDiscountedPrice(product.price, product.discount);
+
+  const handleCartClick = async () => {
+    const url = import.meta.env.VITE_SERVER_URL;
+
+    try{
+      await axios.put(`${url}/api/cart`,{productId:product._id,action:true,quantity},{withCredentials:true})
+      const response = await axios.get(`${url}/api/cart`,{withCredentials:true})
+
+      dispatch(addProductToCart(response.data.cartData.products));
+                         
+    }catch(e){
+      console.log("Error",e)
+    }
+  }
+
+
+  let isFavourite = false;
+
+  if(favourite.length > 0){
+    isFavourite = favourite.filter((item)=>(item._id === productId)).length>0 ? true :false
+    }
+
+    const handleFavouriteClick = async (_id:string) => {
+
+      const url = import.meta.env.VITE_SERVER_URL;
+  
+      try{
+        await axios.put(`${url}/api/favourite`,{productId: _id,action:!isFavourite},{withCredentials:true});
+  
+  
+        const response = await axios.get(`${url}/api/favourite`,{withCredentials:true});
+  
+        dispatch(addProductToFavourite(response.data.favouriteData.products));
+  
+      }catch(error){
+        console.log("Favourite Error",error)
+      }
+  
+    }
 
   return (
     <div className="w-full">
@@ -46,17 +97,17 @@ const ProductPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Images Section */}
             <div className="w-full">
-              <Tabs value="image1">
+              <Tabs value={product.images[0]}>
                 <TabsBody className="">
-                  {product.image.map((el) => (
+                  {product.images.map((el) => (
                     <TabPanel
-                      key={el.label}
-                      value={el.label}
+                      key={el}
+                      value={el}
                       className="flex justify-start  sm:justify-center items-center mx-auto "
                     >
                       <div className="relative">
                         <img
-                          src={el.url}
+                          src={el}
                           alt="image"
                           className="max-h-96 mx-auto"
                         />
@@ -65,11 +116,11 @@ const ProductPage = () => {
                   ))}
                 </TabsBody>
                 <TabsHeader className="bg-transparent space-x-5 justify-center relative z-0">
-                  {product.image.map((el) => (
-                    <Tab key={el.label} value={el.label} className="w-12">
+                  {product.images.map((el) => (
+                    <Tab key={el} value={el} className="w-12">
                       <img
                         className="w-12 h-12 rounded-full"
-                        src={el.url}
+                        src={el}
                         alt="image"
                       />
                     </Tab>
@@ -82,16 +133,20 @@ const ProductPage = () => {
               <div>
                 <h2 className="text-2xl font-bold">{product.name}</h2>
               </div>
+              <div className="w-full flex justify-start items-center gap-x-2">
+                <span>Brand:</span>
+                <h5 className="font-bold">{product.brand}</h5>
+              </div>
 
               <div className="flex justify-start items-baseline space-x-2">
                 <p className="line-through opacity-80">
-                  {formatCurrency(Number(product.price.original))}
+                  {formatCurrency(Number(product.price))}
                 </p>
-                <p className="font-semibold">
-                  ₹{formatCurrency(Number(product.price.discount))}
+                <p className="font-semibold text-xl">
+                  {formatCurrency(Number(discountedPrice))}
                 </p>
-                <p className="text-xs text-green-500 font-semibold">
-                  {product.price.percent}% off
+                <p className="text-xl text-green-500 font-semibold">
+                  {product.discount}% off
                 </p>
               </div>
 
@@ -108,6 +163,7 @@ const ProductPage = () => {
                   size="sm"
                   variant="outlined"
                   color="light-green"
+                  disabled={quantity===product.quantity}
                   onClick={() => setQuantity((pre) => ++pre)}
                 >
                   <IoAdd className="text-base" />
@@ -125,43 +181,31 @@ const ProductPage = () => {
 
                 <Button
                   size="md"
-                  color="green"
-                  className="px-5 rounded-full"
-                  onClick={() => {
-                    if (!isPresentInCart) {
-                      dispatch(addProductToCart(productId as string));
+                  color="green" 
+                  className="px-5 rounded-full flex justify-center items-center font-medium"
+                  onClick={async ()=>{
+                    if(!isPresentInCart){
+                    await handleCartClick()
                     }
-
                     dispatch(onCartOpen());
                   }}
                 >
-                  {isPresentInCart ? "Go to Cart" : "Add to cart"}
+                  <MdAddShoppingCart className="w-4 h-4 mr-2" />
+                  {isPresentInCart ? <span>Go to cart</span> : <span>Add to cart</span>}
                 </Button>
               </div>
 
-              {/* Rating */}
-              <Rating
-                value={Number(product.rating)}
-                ratedColor={
-                  Number(product.rating) > 4
-                    ? "green"
-                    : Number(product.rating) > 2
-                    ? "yellow"
-                    : "red"
-                }
-                unratedColor={
-                  Number(product.rating) > 4
-                    ? "green"
-                    : Number(product.rating) > 2
-                    ? "yellow"
-                    : "red"
-                }
-                readonly
-              />
-
-              <div className="flex gap-4">
-                <BiLeaf className="w-6 h-6" />
-                <p>Add to favourites</p>
+              <div className="flex gap-4 group cursor-pointer" onClick={async () => {
+                handleFavouriteClick(product._id)
+              }}>
+                {isFavourite ? (
+                  <>
+                  <BiSolidLeaf className="text-green-500 w-6 h-6" />
+                <p className="group-hover:underline">Favourite</p>
+                  
+                  </>
+                ) : (<><BiLeaf className="w-6 h-6" />
+                <p className="group-hover:underline">Add to favourites</p></>)}
               </div>
               <div className="mt-2">
                 <Button className="flex justify-center items-center space-x-2">
@@ -173,9 +217,9 @@ const ProductPage = () => {
               </div>
 
               <div className="w-full mt-5 flex justify-start items-start gap-2">
-                <p>Categories:</p>
+                <p>SubCategory:</p>
                 <p>
-                  {product.categories
+                  {product.subCategories
                     .map((el) => el.charAt(0).toUpperCase() + el.slice(1))
                     .join(", ")}
                 </p>

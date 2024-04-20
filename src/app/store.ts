@@ -7,6 +7,9 @@ import searchReducer from "./features/searchSlice"
 import authReducer from "./features/authSlice"
 import surveyReducer from "./features/surveySlice"
 import { apiSlice } from './api/apiSlice'
+import subCategoriesReducer from "./features/subCategoriesSlice"
+import favouriteReducer from "./features/favouriteSlice"
+import profileReducer from "./features/profileSlice"
 
 export const store = configureStore({
     reducer: {
@@ -17,6 +20,9 @@ export const store = configureStore({
         search:searchReducer,
         auth:authReducer,
         survey:surveyReducer,
+        subcategories:subCategoriesReducer,
+        favourite:favouriteReducer,
+        profile:profileReducer,
         [apiSlice.reducerPath]:apiSlice.reducer,
     },
     middleware:getDefaultMiddleware => getDefaultMiddleware().concat(apiSlice.middleware)

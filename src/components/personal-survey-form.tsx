@@ -1,14 +1,24 @@
-import { useEffect, useState } from "react";
-import Input from "./ui/input";
-import { FaUser } from "react-icons/fa";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { FaCheckDouble, FaUser } from "react-icons/fa";
 import Select from "./ui/select";
 import {v4 as uuid} from "uuid"
-import FilterOption from "./categories/FilterOption";
 import { Radio } from "@material-tailwind/react";
 import Button from "./ui/button";
 import { cn } from "../lib/cn";
-import { useAppDispatch } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import {  setSurveyClose } from "../app/features/surveySlice";
+import { IoIosContact } from "react-icons/io";
+import { CiUser } from "react-icons/ci";
+import { selectCurrentUser } from "../app/features/authSlice";
+import CheckboxOption from "./CheckboxOption";
+import { useForm } from "react-hook-form";
+import { PersonalSurveyType, personalSurveySchema } from "../lib/schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import FormInput from "./ui/form-input";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { useCurrentUserMutation } from "../app/services/authApiSlice";
+import { removeObjectFromLocalStorage } from "../lib/user-store";
 
 
 const genderData = [
@@ -28,79 +38,39 @@ const genderData = [
 
 const DiseaseCondition=[
   {
-    label:"Asthma",
+    label:"Hair fall",
   },
   {
-    label:"Cancer",
+    label:"Skin problem",
   },
   {
-    label:"Cardiac disease",
+    label:"Dry skin",
   },
   {
-    label:"Diabetes",
+    label:"Poor digestive health",
   },
   {
-    label:"Hypertension",
+    label:"Oral problem",
   },
   {
-    label:"Psychiatric disorder",
-  },
-  {
-    label:"Epilepsy",
-  },
-  {
-    label:"Other diseases",
-  },
-]
-const DiseaseSymptoms=[
-  {
-    label:"Chest pain",
-  },
-  {
-    label:"Respiratory",
-  },
-  {
-    label:"Cardiac disease",
-  },
-  {
-    label:"Hematological",
-  },
-  {
-    label:"Lymphatic",
-  },
-  {
-    label:"Neurological",
-  },
-  {
-    label:"Gastrointestinal",
-  },
-  {
-    label:"Genitourinary",
-  },
-  {
-    label:"Weight gain",
-  },
-  {
-    label:"Musculoskeletal",
-  },
-  {
-    label:"Other symptoms",
+    label:"Low immunity",
   },
 ]
 
 const PersonalSurveyForm = () => {
 
 
-  const surveyOpen = false;
-  // const surveyOpen = useAppSelector(selectSurveyOpen);
+  const user = useAppSelector(selectCurrentUser);
+  const survey = user !==null ? user.userSurvey ? false : true : false;
+
+  const [surveyOpen,setSurveyOpen] = useState<boolean>(survey)
+
   const [open, setOpen] = useState<boolean | undefined>(false);
   const dispatch = useAppDispatch()
 
   const [surveyComplete,setSurveyComplete] = useState<boolean>(false);
 
   const [scrollWidth, setScrollWidth] = useState<number>(0);
-
-  // const [surveyOpen,setSurveyOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -134,6 +104,170 @@ const PersonalSurveyForm = () => {
     setOpen(surveyOpen);
   }, [surveyOpen]);
 
+  // Survey States
+
+  const [problem,setProblems] = useState<string[]>([]);
+
+  const [medication,setMedication] = useState<boolean|undefined>(undefined);
+  const [wood,setWood] = useState<boolean|undefined>(undefined);
+
+  const [sleep,setSleep] = useState<boolean|undefined>(undefined);
+  const [gender,setGender] = useState<string>('');
+  const [kids,setKids] = useState<boolean|undefined>(undefined);
+  const [supplements,setSupplements] = useState<boolean|undefined>(undefined);
+  const [pet,setPet] = useState<boolean|undefined>(undefined);
+
+  const handleGenderValue = useCallback( (str:string)=>{
+
+    setGender(str)
+
+  },[])
+
+  const handleProblemValues = useCallback((label:string,action:boolean)=>{
+
+    if(label.length===0) return;
+    
+    if(action){
+      setProblems(pre=>[...pre, label])
+    }else if(!action){
+      setProblems(pre=>pre.filter(problem=>problem!==label));
+    }
+
+
+  },[]);
+
+  const handleRadioMedicationChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value;
+
+    if(value==='yes'){
+    setMedication(true);
+    }else if(value==="no"){
+      setMedication(false);
+    }
+  }
+  const handleRadioKidsChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value;
+
+    if(value==='yes'){
+    setKids(true);
+    }else if(value==="no"){
+      setKids(false);
+    }
+  }
+  const handleRadioPetsChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value;
+
+    if(value==='yes'){
+    setPet(true);
+    }else if(value==="no"){
+      setPet(false);
+    }
+  }
+  const handleRadioWoodChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value;
+
+    if(value==='yes'){
+    setWood(true);
+    }else if(value==="no"){
+      setWood(false);
+    }
+  }
+  const handleRadioSupplementChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value;
+
+    if(value==='yes'){
+    setSupplements(true);
+    }else if(value==="no"){
+      setSupplements(false);
+    }
+  }
+  const handleRadioSleepChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value;
+
+    if(value==='yes'){
+    setSleep(true);
+    }else if(value==="no"){
+      setSleep(false);
+    }
+  }
+
+  const [currentUser] = useCurrentUserMutation()
+
+  const [loading,setLoading] = useState<boolean>(false);
+
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<PersonalSurveyType>({
+    resolver: zodResolver(personalSurveySchema),
+    defaultValues: {
+      firstName:"",
+      lastName:"",
+    },
+  });
+
+  const onsubmit = async (values: PersonalSurveyType) => {
+
+    if(typeof pet !== "boolean" || typeof medication !== "boolean" ||typeof sleep !== "boolean" ||typeof wood !== "boolean" ||typeof kids !== "boolean" ||typeof supplements !== "boolean" || problem.length===0 || gender.length===0){
+      toast.error("Please select fields!");
+      return;
+    }
+
+    removeObjectFromLocalStorage('user');
+
+    const url = import.meta.env.VITE_SERVER_URL;
+
+    setLoading(true);
+
+    try{
+       await axios.post(`${url}/api/survey`,{...values,kids,pet,medication,problem,wood,supplements,gender:gender.toLowerCase(),sleep},{withCredentials:true});
+
+       await currentUser('').unwrap()
+
+
+      reset()
+
+      setMedication(undefined)
+      setSleep(undefined)
+      setKids(undefined)
+      setPet(undefined)
+      setGender('')
+      setWood(undefined)
+      setSupplements(undefined)
+      setProblems([])
+
+      setOpen(false)
+                    setTimeout(()=>{
+                      setSurveyComplete(true)
+                    },300)
+
+                    setTimeout(()=>{
+                      setSurveyComplete(false)
+                    },1700)
+                    setTimeout(()=>{
+                      dispatch(setSurveyClose())
+                      setSurveyOpen(false);
+                    },2000)
+
+      toast.success("Successfully submit survey form")
+
+      setTimeout(()=>{
+        window.location.href="/"
+
+      },2400)
+
+    }catch(error){
+      console.log("Survey Error:",error);
+    }
+    finally{
+      setLoading(false);
+    }
+
+  }
+
   if (!surveyOpen) {
     return null;
   }
@@ -159,48 +293,40 @@ const PersonalSurveyForm = () => {
 
               <div className="w-full bg-gray-500/50 rounded-xl py-[0.25px] my-5" />
 
-              <form action="" className="space-y-10">
+              <form 
+              onSubmit={handleSubmit(onsubmit)}
+               className="space-y-10">
 
                 {/*  Name */}
                 <div className="w-full flex flex-col sm:flex-row  justify-between items-center gap-x-10 gap-y-10">
 
-                  <Input icon={FaUser} label="First Name"/>
-                  <Input icon={FaUser} label="Last Name"/>
+                  <FormInput icon={FaUser} label="First Name" name="firstName" register={register} errors={errors.firstName} disabled={loading}/>
+
+                  <FormInput register={register} name="lastName" icon={FaUser} label="Last Name" errors={errors.lastName} disabled={loading}/>
                 </div>
 
                 {/* Age, Gender */}
                 <div className="w-full grid grid-cols-1 sm:grid-cols-2 justify-between items-center gap-x-10 gap-y-10">
 
-                  <Input icon={FaUser} label="Age" type="number" placeholder="e.g., 24" className=""/>
+                  <FormInput icon={CiUser} label="Age" name="age" register={register} type="number" placeholder="e.g., 24" className="" disabled={loading} errors={errors.age}/>
 
-                  <Select data={genderData} name="Select your gender" />
+                  <Select data={genderData} name="Select your gender" handleSelectValue={handleGenderValue} />
 
                 </div>
                 
                 <div className="w-full flex flex-col sm:flex-row gap-y-10 justify-between items-center gap-x-10">
 
-                  <Input icon={FaUser} label="Contact Number" placeholder="9988776655" type="number"/>
-                  <Input icon={FaUser} label="Email"/>
+                  <FormInput icon={IoIosContact} label="Contact Number" placeholder="9988776655" type="tel" register={register} name="contact" errors={errors.contact} disabled={loading} className="max-w-[22rem]"/>
+
                 </div>
 
                 {/* conditions */}
 
                 <div className="w-full">
-                  <p className="text-sm">Check the conditions that apply to you or any member of your immediate relatives:</p>
+                  <p className="text-sm">Check the problem that you're currently experiencing:</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2">
                     {DiseaseCondition.map(el=>(
-                    <FilterOption label={el.label} key={el.label + "disease"}/>
-                    ))}
-
-                  </div>
-                </div>
-
-                {/* Symptoms */}
-                <div className="w-full">
-                  <p className="text-sm">Check the symptoms that you' re currently experiencing:</p>
-                  <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3">
-                    {DiseaseSymptoms.map(el=>(
-                    <FilterOption label={el.label} key={el.label + "symptoms"}/>
+                    <CheckboxOption label={el.label} key={el.label + "disease"} handlemultipleCheck={handleProblemValues}/>
                     ))}
 
                   </div>
@@ -213,45 +339,67 @@ const PersonalSurveyForm = () => {
                   Are you currently taking any medication?
                   </p>
                   <div className="flex justify-start items-center gap-x-10 text-sm">
-                    <Radio crossOrigin={""} name="medication" label="Yes" />
-                    <Radio crossOrigin={""} name="medication" label="No" />
+                    <Radio disabled={loading} crossOrigin={""} name="medication" value="yes"  label="Yes" onChange={handleRadioMedicationChange} />
+                    <Radio disabled={loading} crossOrigin={""} name="medication" value="no" label="No" onChange={handleRadioMedicationChange} />
 
                   </div>
                 </div>
 
-                {/* Alcohol */}
+                {/* Sleep */}
                 <div className="w-full">
                   <p className="text-sm">
-                  How often do you consume alcohol?
+                  How often do you sleep less than 6 hours?
                   </p>
                   <div className="flex justify-start items-center gap-x-10 text-sm flex-wrap">
-                    <Radio crossOrigin={""} name="alcohol" label="Daily" />
-                    <Radio crossOrigin={""} name="alcohol" label="Weekly" />
-                    <Radio crossOrigin={""} name="alcohol" label="Monthly" />
-                    <Radio crossOrigin={""} name="alcohol" label="Occasionally" />
-                    <Radio crossOrigin={""} name="alcohol" label="Never" />
+                    <Radio disabled={loading} crossOrigin={""} name="sleep" value="yes" label="Daily" onChange={handleRadioSleepChange} />
+                    <Radio disabled={loading} crossOrigin={""} name="sleep" value="yes" label="Weekly" onChange={handleRadioSleepChange} />
+                    <Radio disabled={loading} crossOrigin={""} name="sleep" label="Monthly" value="yes" onChange={handleRadioSleepChange} />
+                    <Radio disabled={loading} crossOrigin={""} name="sleep" label="Never" value="no" onChange={handleRadioSleepChange} />
 
                   </div>
                 </div>
 
-                {/* Tobacco */}
+                {/* Wood */}
 
                 <div className="w-full">
-                  <label htmlFor="tobacco" className="text-sm">Do you use any kind of tobacco or have you ever used them?</label>
+                  <p className="text-sm">Are you currently using or planning to use wooden stuffs ?</p>
                   <div className="flex justify-start items-center gap-x-10 text-sm">
-                    <Radio crossOrigin={""} name="tobacco" label="Yes" />
-                    <Radio crossOrigin={""} name="tobacoo" label="No" />
+                    <Radio disabled={loading} crossOrigin={""} name="wood" value="yes" label="Yes" onChange={handleRadioWoodChange} />
+                    <Radio disabled={loading} crossOrigin={""} name="wood" value="no" label="No" onChange={handleRadioWoodChange} />
+                  </div>
+                </div>
+
+                {/* kids */}
+
+                <div className="w-full">
+                  <p className="text-sm">
+                  Are there kids in your life?
+                  </p>
+                  <div className="flex justify-start items-center gap-x-10 text-sm flex-wrap">
+                    <Radio disabled={loading} crossOrigin={""} name="kids" value="yes" label="Yes" onChange={handleRadioKidsChange} />
+                    <Radio disabled={loading} crossOrigin={""} name="kids" value="no" label="No" onChange={handleRadioKidsChange} />
+
                   </div>
                 </div>
 
 
-                {/* Drugs */}
+                {/* supplements */}
 
                 <div className="w-full">
-                  <label className="text-sm" htmlFor="drugs">Do you use any kind of illegal drugs or have you ever used them?</label>
+                  <label className="text-sm" htmlFor="supplement">Do you use any kind of natural supplements?</label>
                   <div className="flex justify-start items-center gap-x-10 text-sm">
-                    <Radio crossOrigin={""} name="drugs" label="Yes" />
-                    <Radio crossOrigin={""} name="drugs" label="No" />
+                    <Radio disabled={loading} crossOrigin={""} name="supplement" value="yes" label="Yes" onChange={handleRadioSupplementChange} />
+                    <Radio disabled={loading} crossOrigin={""} name="supplement" value="no" label="No" onChange={handleRadioSupplementChange} />
+                  </div>
+                </div>
+
+                {/* pets */}
+
+                <div className="w-full">
+                  <label className="text-sm" htmlFor="drugs">Do you have pets?</label>
+                  <div className="flex justify-start items-center gap-x-10 text-sm">
+                    <Radio disabled={loading} crossOrigin={""} name="pets" value="yes" label="Yes" onChange={handleRadioPetsChange} />
+                    <Radio disabled={loading} crossOrigin={""} name="pets" value="no" label="No" onChange={handleRadioPetsChange} />
                   </div>
                 </div>
 
@@ -259,21 +407,7 @@ const PersonalSurveyForm = () => {
 
                 <div className="my-10 w-full flex items-center justify-center">
 
-                  <Button label="Submit" onClick={(e)=>{e.preventDefault()
-                    setOpen(false)
-                    setTimeout(()=>{
-                      setSurveyComplete(true)
-                    },300)
-
-                    setTimeout(()=>{
-                      setSurveyComplete(false)
-                    },1700)
-                    setTimeout(()=>{
-                      dispatch(setSurveyClose())
-                    },2000)
-                    
-                    }} className="w-52 rounded-full hover:text-white"/>
-
+                  <Button label="Submit" type="submit" onClick={()=>{}}className="w-52 rounded-full hover:text-white" loading={loading} disabled={loading}/>
                 </div>
               </form>
             </div>
@@ -287,8 +421,9 @@ const PersonalSurveyForm = () => {
             surveyComplete ? "-translate-y-96" : "translate-y-full"
           } ${surveyComplete ? "opacity-100" : "opacity-0"}`}
         >
-          <div className="w-full p-10 rounded-xl bg-white">
-               Thank you for the survey
+          <div className="w-full p-10 rounded-xl bg-white flex justify-center items-center">
+            <FaCheckDouble className="text-green-500 w-5 h-5 mr-3" />
+               <span className="text-semibold">Thank you for the survey</span>
           </div>
 
         </div>

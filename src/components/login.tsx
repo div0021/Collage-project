@@ -39,21 +39,24 @@ const Login = () => {
 
 
   const onSubmit = async (values: LoginUserInput) => {
-    // console.log(values);
-
+    
     try {
       // login
        await login({password:values.password as string,email:values.email as string}).unwrap();
 
 //  Get current user
       await currentUser('').unwrap()
-      reset();
+      reset()
 
       toast.success("Login Successful");
       setOpen(false);
       setTimeout(() => {
         dispatch(onLoginClose());
       }, 300);
+
+      setTimeout(()=>{
+        window.location.reload();
+      },600)
     } catch (errors) {
       const { status } = handleErrorResponse.parse(errors);
       if (status === 500) toast.error("Currently service is unavailable");
@@ -109,15 +112,6 @@ const Login = () => {
               </button>
 
               <div className="h-0.5 w-52 bg-[#679F0A]/50 rounded-full" />
-
-              {/* <Button
-                label="Google"
-                onClick={() => {
-                  //TOdo google login
-                }}
-                className="rounded-full w-60 sm:w-36 lg:w-48"
-                icon={FaGoogle}
-              /> */}
 
               <a href={getGoogleOAuthURL()} className="px-5 py-3 bg-green-500/50 text-center rounded-full flex justify-center items-center">
                 <FaGoogle className="w-4 h-4 mr-2" />

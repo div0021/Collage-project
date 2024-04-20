@@ -29,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        `relative disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-80 border border-transparent hover:border-[#679F0A] transition-all duration-200 ease-in-out hover:ring-2 hover:ring-offset-2 hover:ring:ring-[#679F0A] w-full flex justify-center items-center 
+        `relative disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-80 border border-transparent hover:border-[#679F0A] transition-all duration-300 ease-in-out hover:ring-2 hover:ring-offset-2 hover:ring:ring-[#679F0A] w-full flex justify-center items-center 
         ${outline ? "bg-transparent" : "bg-[#679F0A]"}
         ${outline ? "border-black text-black" : "border-[#679F0A] text-black"}
         ${

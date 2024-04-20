@@ -1,17 +1,25 @@
 import { ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface BannerProps {
   src: string;
   titleContent: ReactNode;
   description?: string;
   buttonLabel: string;
+  buttonLink: string;
+  name:string;
 }
+
 const Banner = ({
   buttonLabel,
   src,
   titleContent,
   description,
+  buttonLink,
+  name
 }: BannerProps) => {
+
+  const navigate = useNavigate();
   return (
     <div className="relative min-w-full">
       <img
@@ -23,7 +31,7 @@ const Banner = ({
       <div className="absolute z-10 top-4 sm:top-1/3 md:top-1/3 lg:top-1/3 w-7/12 sm:w-3/6 h-2/3">
         <div className="pl-7 py-3 lg:pl-20 lg:py-5">
           <h6 className="font-bold text-[10px] lg:text-sm lg:font-semibold">
-            Healthy herbal
+            {name}
           </h6>
           {titleContent ? (
             titleContent
@@ -44,7 +52,7 @@ const Banner = ({
           </p>
           <button
             className="px-2 py-2 md:px-5 text-[10px]  md:py-3 font-semibold md:text-xs text-white bg-[#679F0A] rounded-full cursor-pointer border-2 border-transparent hover:border-[#679F0A]
-           hover:text-black transition-all duration-200 ease-in-out hover:shadow-md hover:shadow-gray-400/90 hover:bg-transparent"
+           hover:text-black transition-all duration-200 ease-in-out hover:shadow-md hover:shadow-gray-400/90 hover:bg-transparent" onClick={()=>{navigate(buttonLink)}}
           >
             {buttonLabel ? buttonLabel : "Button"}
           </button>
