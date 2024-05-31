@@ -169,6 +169,7 @@ const Ayurvedic = () => {
           `${url}/api/products/category/6612674f59193eeb4d734225`
         );
 
+
         setAyurvedicProducts(response.data.products);
       } catch (error) {
         console.log("GETAP", error);
@@ -180,7 +181,7 @@ const Ayurvedic = () => {
   useEffect(() => {
     if (ayurvedicProducts.length > 0) {
       const temp = ayurvedicProducts[0].category.subCategories.map((el) => {
-        return { label: el.trim() };
+        return { label: el };
       });
 
       temp.sort((a, b) => {

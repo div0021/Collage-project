@@ -28,9 +28,11 @@ const ResetPassword = () => {
       const [isReset,setIsReset]= useState<boolean>(false);
       const onSubmit = async (data: ResetPasswordType) => {
 
+        const url = import.meta.env.VITE_SERVER_URL;
+
         try{
 
-            await axios.patch("http://localhost:1337/api/reset",{password:data.password,passwordConfirmation:data.confirmPassword},{withCredentials:true})
+            await axios.patch(`${url}/api/reset`,{password:data.password,passwordConfirmation:data.confirmPassword},{withCredentials:true})
 
           toast.success("Password is reset is successfully");
 

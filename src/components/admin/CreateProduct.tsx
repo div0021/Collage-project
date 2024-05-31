@@ -66,8 +66,6 @@ const CreateProduct = () => {
       try{
         const response = await axios.get(`${url}/api/allCategories`);
 
-        console.log(response.data);
-
         const categories:CategoryDataType[] = response.data.categories;
 
         setAllCategoriesData(categories);
@@ -131,8 +129,8 @@ const CreateProduct = () => {
   const onSubmit =async (values:ProductSchemaType) => {
 
 
-    if(images.length!== 4){
-      toast.error("Upload 4 product images!");
+    if(images.length<1){
+      toast.error("Upload atleast 1 product images!");
       return;
     }
 
@@ -142,8 +140,6 @@ const CreateProduct = () => {
     }
 
     const finalValue = {...values,images:images,subCategories:subCategory,isFeatured,isArchived};
-
-    console.log(finalValue);
 
     const url = import.meta.env.VITE_SERVER_URL
 

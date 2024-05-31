@@ -30,13 +30,13 @@ const ForgetPassword = () => {
         },
       });
       const onSubmit = async (data: ForgetPasswordMailType) => {
-        // console.log("Data submitted: ", data);
 
+        const url = import.meta.env.VITE_SERVER_URL;
         try{
 
             setIsLoading(true)
 
-        const response = await axios.post("http://localhost:1337/api/reset",{email:data.email},{withCredentials:true});
+        const response = await axios.post(`${url}/api/reset`,{email:data.email},{withCredentials:true});
 
         // console.log(response.data);
         toast.success('Please check your Email');

@@ -191,7 +191,7 @@ const EcoFriendly = () => {
   useEffect(()=>{
     if(ecoFriendlyProducts.length>0){
       const temp = ecoFriendlyProducts[0].category.subCategories.map(el=>{
-        return ({label:el.trim()})
+        return ({label:el})
       })
 
       temp.sort((a,b)=>{

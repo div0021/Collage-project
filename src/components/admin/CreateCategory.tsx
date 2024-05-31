@@ -50,8 +50,6 @@ const CreateCategory = () => {
 
   const onSubmit = async (values:CategorySchemaType) => {
 
-    console.log(values);
-
     if(subCategory.length<1){
       toast.error("Create atleast one subcategory!");
       return;
@@ -59,16 +57,14 @@ const CreateCategory = () => {
 
     const finalValue = {...values,subCategories:subCategory};
 
-    // console.log(finalValue);
     setLoading(true);
 
     const url = import.meta.env.VITE_SERVER_URL
 
     try{
 
-    const response = await axios.post(`${url}/api/admin/category/create`,finalValue,{withCredentials:true});
+    await axios.post(`${url}/api/admin/category/create`,finalValue,{withCredentials:true});
 
-    console.log(response);
     toast.success("Category is created!");
 
     //reset all

@@ -47,7 +47,6 @@ const UploadImage = ({handleImages}: UploadImageProps) => {
 
             const cloudData = await res.data;
             handleImages(cloudData.url)
-            // console.log("url ",cloudData.url);
             toast.success("Image uploaded");
             setImage(null);
         }catch(error){

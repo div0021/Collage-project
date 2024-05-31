@@ -1,6 +1,5 @@
 import NavSection from "./nav-section";
 import Logo from "./logo";
-import Search from "./search";
 import Cart from "./cart";
 import UserSection from "./user-section";
 import Favourite from "./favourite";
@@ -18,7 +17,6 @@ const Navbar = () => {
                 <Logo className="relative -top-2"/>
 
                 <div className="flex items-center space-x-4 md:space-x-5 lg:space-x-10">
-                <Search />
                 <div className='hidden md:flex flex-row justify-center items-center space-x-3 '>
                 <NavSection />
               </div>

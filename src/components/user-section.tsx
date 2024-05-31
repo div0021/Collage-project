@@ -48,6 +48,9 @@ const UserSection = () => {
     toast.success("Logout successfully");
     dispatch(resetFavourite());
     dispatch(resetCart())
+    setTimeout(()=>{
+      window.location.reload();
+    },500)
     }catch(error){
         toast.error("LogOut failed! Try again.")
         console.log("LogOutError::",error);

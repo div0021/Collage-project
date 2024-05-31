@@ -187,7 +187,7 @@ const Organic = () => {
   useEffect(()=>{
     if(organicProducts.length>0){
       const temp = organicProducts[0].category.subCategories.map(el=>{
-        return ({label:el.trim()})
+        return ({label:el})
       })
 
       temp.sort((a,b)=>{

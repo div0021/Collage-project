@@ -25,11 +25,14 @@ import { calculateDiscountedPrice } from "../lib/calculateDiscountedPrice";
 import CircularLoader from "./loaders/circular-loader";
 import axios from "axios";
 import { MdAddShoppingCart } from "react-icons/md";
-import { addProductToFavourite, selectFavouriteProduct } from "../app/features/favouriteSlice";
+import { addProductToFavourite, onFavouriteOpen, selectFavouriteProduct } from "../app/features/favouriteSlice";
+import { selectCurrentUser } from "../app/features/authSlice";
 
 const ProductPage = () => {
   const { productId } = useParams();
   const favourite = useAppSelector(selectFavouriteProduct);
+
+  const currentUser = useAppSelector(selectCurrentUser);
 
 
   const dispatch = useAppDispatch();
@@ -150,11 +153,19 @@ const ProductPage = () => {
                 </p>
               </div>
 
+
               {/* description */}
               <div>
                 <p className="w-full lg:w-[70%] text-gray-800 text-sm tracking-wide">
                   {product.description}
                 </p>
+              </div>
+
+               {/* Category */}
+
+               <div className="w-full flex justify-start items-center gap-x-2">
+                <span>Category:</span>
+                <h5 className="font-bold">{product.category.name}</h5>
               </div>
 
               {/* Quantity  */}
@@ -196,7 +207,11 @@ const ProductPage = () => {
               </div>
 
               <div className="flex gap-4 group cursor-pointer" onClick={async () => {
-                handleFavouriteClick(product._id)
+                if(!currentUser){
+                  dispatch(onFavouriteOpen());
+                  return;
+                }
+                await handleFavouriteClick(product._id)
               }}>
                 {isFavourite ? (
                   <>

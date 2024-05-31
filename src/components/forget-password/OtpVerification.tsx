@@ -12,8 +12,6 @@ import { toast } from "react-toastify";
 const OtpVerification = () => {
   const { id } = useParams();
 
-//   console.log("Params", id);
-
   const navigate = useNavigate();
 
   const [otp, setOtp] = useState<string>("");
@@ -26,11 +24,10 @@ const OtpVerification = () => {
     }else{
         setError(false);
     }
-    // console.log(otp);
-
+    const url = import.meta.env.VITE_SERVER_URL;
     try{
 
-         await axios.post(`http://localhost:1337/api/reset/${id}`,{otp:otp},{withCredentials:true});
+         await axios.post(`${url}/api/reset/${id}`,{otp:otp},{withCredentials:true});
 
         toast.success("OTP is verified, Reset your password");
 
